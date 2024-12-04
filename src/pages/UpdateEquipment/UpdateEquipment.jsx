@@ -1,10 +1,10 @@
 import { useContext } from "react";
 import { AuthContext } from "../../provider/AuthProvider/AuthProvider";
 
-const AddEquipment = () => {
-    const { user } = useContext(AuthContext);
+const UpdateEquipment = () => {
+    const {user} = useContext(AuthContext);
 
-    const handleAddEquipment = (e) => {
+    const handleUpdateEquipment = (e) => {
         e.preventDefault();
 
         const form = e.target;
@@ -32,22 +32,14 @@ const AddEquipment = () => {
             stockAvailability
             };
 
-        fetch("http://localhost:5000/equipments/", {
-            method: "POST", 
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(itemInfo)
-        })
-        .then(res => res.json())
-        .then(data => console.log(data))
+        console.log(itemInfo);
     };
-
+    
     return (
         <div>
-            <h2>Add Your Equipment </h2>
+            <h2>Update Your Equipment </h2>
             <div>
-                <form onSubmit={handleAddEquipment}>
+                <form onSubmit={handleUpdateEquipment}>
                     <div className="hidden">
                         <label htmlFor="username">
                             <span>User Name:</span>
@@ -161,7 +153,7 @@ const AddEquipment = () => {
                         </label>
                     </div>
                     <div>
-                        <button>Add Equipment</button>
+                        <button>Update Equipment</button>
                     </div>
                 </form>
             </div>
@@ -169,4 +161,4 @@ const AddEquipment = () => {
     );
 };
 
-export default AddEquipment;
+export default UpdateEquipment;
