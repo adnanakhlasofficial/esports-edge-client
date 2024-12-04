@@ -7,3 +7,9 @@
         @apply container mx-auto px-4;
     }
 }
+
+.swiper-button-prev,
+.swiper-button-next,
+.swiper-pagination-bullet-active {
+    @apply !text-blue-600;
+}
