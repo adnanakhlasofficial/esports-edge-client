@@ -1,48 +1,43 @@
-const EquipmentCard = () => {
+import PropTypes from "prop-types";
+import ReactStars from "react-rating-stars-component";
+
+const EquipmentCard = ({ equipment }) => {
+    console.log(equipment);
+
     return (
-        <div className="max-w-sm mx-auto my-4 p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md transition duration-300">
-            {" "}
-            <img
-                className="w-full h-48 object-cover rounded-t-lg"
-                src=""
-                alt=""
-            />{" "}
-            <div className="p-4">
-                {" "}
-                <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100">
-                    name
-                </h2>{" "}
-                <p className="text-gray-600 dark:text-gray-400">
-                    category
-                </p>{" "}
-                <p className="text-gray-600 dark:text-gray-400 mt-2">
-                    descriptin
-                </p>{" "}
-                <p className="text-xl font-semibold text-gray-800 dark:text-gray-100 mt-4">
-                    $price
-                </p>{" "}
-                <p className="text-yellow-500 mt-2">Rating: rating</p>{" "}
-                <p className="text-gray-600 dark:text-gray-400 mt-2">
-                    Customization: customization
-                </p>{" "}
-                <p className="text-gray-600 dark:text-gray-400 mt-2">
-                    Processing Time: Processing time
-                </p>{" "}
-                <p className="text-gray-600 dark:text-gray-400 mt-2">
-                    Stock Status: stockAvailability
-                </p>{" "}
-                <div className="mt-4">
-                    {" "}
-                    <p className="text-gray-600 dark:text-gray-400">
-                        User Email: email
-                    </p>{" "}
-                    <p className="text-gray-600 dark:text-gray-400">
-                        User Name: username
-                    </p>{" "}
-                </div>{" "}
-            </div>{" "}
+        <div className="bg-slate-200 p-4 rounded-md w-72">
+            <div className="mb-6 h-48 flex justify-center">
+                <img
+                    className="h-full mix-blend-multiply"
+                    src={equipment.image}
+                    alt=""
+                />
+            </div>
+            <div className="space-y-2">
+                <h2 className="text-xl font-bold h-12">{equipment.name}</h2>
+                <p className="flex gap-2 items-center">
+                    <ReactStars
+                        count={5}
+                        value={4.8}
+                        edit={false}
+                        size={24}
+                        activeColor="#ffd700"
+                    />
+                    4.8
+                </p>
+            </div>
+            <div className="flex justify-between items-center">
+                <p className="text-2xl font-bold">{equipment.price}</p>
+                <button className="relative px-8 py-2 rounded-md bg-transparent isolation-auto z-10 border-2 text-blue-800 hover:text-white font-semibold border-blue-500 before:absolute before:w-full before:transition-all before:duration-700 before:hover:w-full before:-left-full before:hover:left-0 before:rounded-full before:bg-blue-500 before:-z-10 before:aspect-square before:hover:scale-150 overflow-hidden before:hover:duration-700">
+                    View Details
+                </button>
+            </div>
         </div>
     );
+};
+
+EquipmentCard.propTypes = {
+    equipment: PropTypes.object,
 };
 
 export default EquipmentCard;

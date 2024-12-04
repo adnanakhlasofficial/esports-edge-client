@@ -14,31 +14,40 @@ const router = createBrowserRouter([
         element: <Root></Root>,
         children: [
             {
-                path: "/", 
-                element: <Home></Home>
+                path: "/",
+                element: <Home></Home>,
+                loader: () => fetch("http://localhost:5000/equipments"),
             },
             {
                 path: "/sports-equipment",
-                element: <SportsEquipment></SportsEquipment>
+                element: <SportsEquipment></SportsEquipment>,
             },
             {
                 path: "/add-equipment",
-                element: <SecureRoute><AddEquipment></AddEquipment></SecureRoute>
+                element: (
+                    <SecureRoute>
+                        <AddEquipment></AddEquipment>
+                    </SecureRoute>
+                ),
             },
             {
                 path: "equipments-list",
-                element: <SecureRoute><EquipmentsList></EquipmentsList></SecureRoute>
-            }
-        ]
+                element: (
+                    <SecureRoute>
+                        <EquipmentsList></EquipmentsList>
+                    </SecureRoute>
+                ),
+            },
+        ],
     },
     {
         path: "/signin",
-        element: <SignIn></SignIn>
+        element: <SignIn></SignIn>,
     },
     {
         path: "/signup",
-        element: <SignUp></SignUp>
-    }
+        element: <SignUp></SignUp>,
+    },
 ]);
 
 export default router;

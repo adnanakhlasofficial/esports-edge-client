@@ -17,7 +17,7 @@ const AddEquipment = () => {
         const customization = form.customization.value;
         const deliveryTime = form.deliveryTime.value;
         const image = form.image.value;
-        const stockAvailability = form.stockAvailability.value;
+        const stockAvailability = form.stockAvailability.value === "on" ? true : false;
 
         const itemInfo = {
             username,
@@ -153,7 +153,7 @@ const AddEquipment = () => {
                         <label htmlFor="stockAvailability">
                             <span>Stock Availabitly:</span>
                             <input
-                                type="text"
+                                type="radio"
                                 name="stockAvailability"
                                 id="stockAvailability"
                                 placeholder="Enter your stockAvailability"
