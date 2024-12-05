@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 const Banner = ({ title, desc }) => {
     return (
-        <div className="relative h-[30rem] flex justify-center items-center text-center">
+        <div className="relative h-[75vh] flex justify-center items-center text-center">
             <div className="absolute w-full h-full -z-10">
                 <img
                     className="w-full h-full object-cover object-center"
@@ -13,6 +13,9 @@ const Banner = ({ title, desc }) => {
             <div>
                 <h2>{title}</h2>
                 <p>{desc}</p>
+            </div>
+            <div className="bg-black/70 absolute w-full h-full">
+
             </div>
         </div>
     );

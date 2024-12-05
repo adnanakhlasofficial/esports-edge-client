@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+    .btn {
+        @apply relative px-8 py-2 rounded-md bg-transparent isolation-auto z-10 border-2 text-black dark:text-white font-semibold border-primary before:absolute before:w-full before:transition-all before:duration-700 before:hover:w-full before:-left-full before:hover:left-0 before:rounded-full before:bg-primary before:-z-10 before:aspect-square before:hover:scale-150 overflow-hidden before:hover:duration-700;
+    }
+}
+
 @layer utilities {
     .wrapper {
         @apply container mx-auto px-4;
@@ -11,5 +17,9 @@
 .swiper-button-prev,
 .swiper-button-next,
 .swiper-pagination-bullet-active {
-    @apply !text-blue-600;
+    @apply !text-sky-600;
+}
+
+.active {
+    @apply !text-primary
 }

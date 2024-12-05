@@ -1,9 +1,37 @@
-import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
+import { FiSun } from "react-icons/fi";
+import { FaMoon } from "react-icons/fa";
 import { AuthContext } from "../../provider/AuthProvider/AuthProvider";
+import logoDark from "/images/logo-dark.png";
+import logoLight from "/images/logo-light.png";
 
 const Navbar = () => {
     const { user, logoutUser } = useContext(AuthContext);
+    const [navStatus, setNavStatus] = useState(true);
+    const [mode, setMode] = useState("light");
+
+    function changeTheme() {
+        const html = document.documentElement;
+
+        if (mode == "light") {
+            html.classList.remove("light");
+            html.classList.add("dark");
+            setMode("dark");
+            localStorage.setItem("mode", "dark");
+        } else {
+            html.classList.remove("dark");
+            html.classList.add("light");
+            setMode("light");
+            localStorage.setItem("mode", "light");
+        }
+    }
+
+    useEffect(() => {
+        const currentMode = localStorage.getItem("mode") || "light";
+        document.documentElement.classList.add(currentMode);
+        setMode(currentMode);
+    }, []);
 
     const handleSignOut = () => {
         logoutUser()
@@ -12,39 +40,107 @@ const Navbar = () => {
     };
 
     return (
-        <nav className="bg-slate-400">
-            <section className="wrapper flex justify-between items-center py-6">
+        <nav className="">
+            <section className="wrapper relative flex justify-between items-center py-6">
                 <div>
-                    <h2>SportsBazar</h2>
+                    <h2 className="text-4xl font-bold">
+                        <img
+                            className="w-24"
+                            src={mode ? logoLight : logoDark}
+                            alt=""
+                        />
+                    </h2>
                 </div>
-                <div>
-                    <ul className="flex gap-6">
-                        <li>
-                            <Link to={"/"}>Home</Link>
-                        </li>
-                        <li>
-                            <Link to={"/sports-equipment"}>
-                                All Sports Equipment
-                            </Link>
-                        </li>
-                        <li>
-                            <Link to={"/add-equipment"}>Add Equipment</Link>
-                        </li>
-                        <li>
-                            <Link to={"/equipments-list"}>
-                                My Equipment List
-                            </Link>
-                        </li>
-                        <li>
-                            {user && user.email ? (
-                                <button onClick={handleSignOut}>
-                                    {user.displayName}
-                                </button>
+
+                <div className="flex gap-6 items-center">
+                    {user && (
+                        <span className="cursor-pointer order-1 group">
+                            <img
+                                className="h-16 w-16 relative z-30 ring-2 ring-blue-500 object-cover rounded-full"
+                                src={user?.photoURL}
+                                alt=""
+                            />
+                            <div className="absolute z-20 bg-slate-200 dark:bg-darkPurple px-8 py-6 transition-all duration-300 -top-52 group-hover:top-full right-0 rounded-lg space-y-6">
+                                <div className="space-y-2">
+                                    <h2 className="text-lg">
+                                        {user?.displayName}
+                                    </h2>
+                                    <p className="text-sm tracking-wider">
+                                        {user?.email}
+                                    </p>
+                                </div>
+                                <div>
+                                    <button
+                                        className="btn w-full"
+                                        onClick={handleSignOut}
+                                    >
+                                        logout
+                                    </button>
+                                </div>
+                            </div>
+                        </span>
+                    )}
+                    <div className="order-2 fixed bottom-6 right-6 w-12 h-12 flex justify-center items-center bg-primary rounded-full z-50">
+                        <button onClick={changeTheme}>
+                            {mode === "light" ? (
+                                <FaMoon className="text-white" size={24} />
                             ) : (
-                                <Link to={"/signin"}>Login</Link>
+                                <FiSun className="text-white" size={24} />
                             )}
-                        </li>
-                    </ul>
+                        </button>
+                    </div>
+                    <div className="order-4 lg:hidden relative z-50">
+                        <button onClick={() => setNavStatus(!navStatus)}>
+                            {navStatus ? "close" : "open"}
+                        </button>
+                    </div>
+                    <div
+                        className={`absolute z-40 bg-slate-200 dark:bg-darkPurple lg:bg-inherit lg:dark:bg-inherit ${
+                            navStatus ? "left-0" : "-left-full"
+                        } transition-transform duration-300 top-0 w-[40vh] h-screen lg:h-auto lg:w-auto lg:static `}
+                    >
+                        <ul className="flex flex-col lg:flex-row px-8 text-center py-16 h-full gap-8 items-end lg:items-center lg:p-0 text-lg font-medium">
+                            <li>
+                                <NavLink
+                                    className="hover:text-primary duration-300"
+                                    to={"/"}
+                                >
+                                    Home
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink
+                                    className="hover:text-primary duration-300"
+                                    to={"/sports-equipment"}
+                                >
+                                    All Sports Equipment
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink
+                                    className="hover:text-primary duration-300"
+                                    to={"/add-equipment"}
+                                >
+                                    Add Equipment
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink
+                                    className="hover:text-primary duration-300"
+                                    to={"/equipments-list"}
+                                >
+                                    My Equipment List
+                                </NavLink>
+                            </li>
+                            {!user && (
+                                <li>
+                                    <NavLink className="btn" to={"/signin"}>
+                                        Login
+                                    </NavLink>
+                                </li>
+                            )}
+                        </ul>
+                    </div>
                 </div>
             </section>
         </nav>

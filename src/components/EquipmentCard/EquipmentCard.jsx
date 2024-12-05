@@ -1,14 +1,15 @@
 import PropTypes from "prop-types";
 import ReactStars from "react-rating-stars-component";
+import { Link } from "react-router-dom";
 
 const EquipmentCard = ({ equipment }) => {
     console.log(equipment);
 
     return (
-        <div className="bg-slate-200 p-4 rounded-md w-72">
+        <div className="bg-slate-200 dark:bg-darkCard p-4 rounded-md w-72">
             <div className="mb-6 h-48 flex justify-center">
                 <img
-                    className="h-full mix-blend-multiply"
+                    className="h-full"
                     src={equipment.image}
                     alt=""
                 />
@@ -28,9 +29,11 @@ const EquipmentCard = ({ equipment }) => {
             </div>
             <div className="flex justify-between items-center">
                 <p className="text-2xl font-bold">{equipment.price}</p>
-                <button className="relative px-8 py-2 rounded-md bg-transparent isolation-auto z-10 border-2 text-blue-800 hover:text-white font-semibold border-blue-500 before:absolute before:w-full before:transition-all before:duration-700 before:hover:w-full before:-left-full before:hover:left-0 before:rounded-full before:bg-blue-500 before:-z-10 before:aspect-square before:hover:scale-150 overflow-hidden before:hover:duration-700">
-                    View Details
-                </button>
+                <Link to={`/equipment/${equipment._id}`}>
+                    <button className="btn">
+                        View Details
+                    </button>
+                </Link>
             </div>
         </div>
     );
