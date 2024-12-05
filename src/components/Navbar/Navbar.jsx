@@ -40,7 +40,7 @@ const Navbar = () => {
     };
 
     return (
-        <nav className="">
+        <nav>
             <section className="wrapper relative flex justify-between items-center py-6">
                 <div>
                     <h2 className="text-4xl font-bold">

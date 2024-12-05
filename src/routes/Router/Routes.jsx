@@ -7,6 +7,7 @@ import EquipmentsList from "../../pages/EquipmentsList/EquipmentsList";
 import SignUp from "../../pages/SignUp/SignUp";
 import SecureRoute from "../SecureRoute/SecureRoute";
 import SignIn from "../../pages/SignIn/SignIn";
+import EquipmentDetails from "../../pages/EquipmentDetails/EquipmentDetails";
 
 const router = createBrowserRouter([
     {
@@ -37,6 +38,16 @@ const router = createBrowserRouter([
                         <EquipmentsList></EquipmentsList>
                     </SecureRoute>
                 ),
+            },
+            {
+                path: "/equipment/:id",
+                element: (
+                    <SecureRoute>
+                        <EquipmentDetails></EquipmentDetails>
+                    </SecureRoute>
+                ),
+                loader: ({ params }) =>
+                    fetch(`http://localhost:5000/equipment/${params.id}`),
             },
         ],
     },
