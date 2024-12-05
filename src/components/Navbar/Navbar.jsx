@@ -97,9 +97,9 @@ const Navbar = () => {
                     <div
                         className={`absolute z-40 bg-slate-200 dark:bg-darkPurple lg:bg-inherit lg:dark:bg-inherit ${
                             navStatus ? "left-0" : "-left-full"
-                        } transition-transform duration-300 top-0 w-[40vh] h-screen lg:h-auto lg:w-auto lg:static `}
+                        } transition-all duration-300 top-0 w-[40vh] h-screen lg:h-auto lg:w-auto lg:static `}
                     >
-                        <ul className="flex flex-col lg:flex-row px-8 text-center py-16 h-full gap-8 items-end lg:items-center lg:p-0 text-lg font-medium">
+                        <ul className="flex flex-col lg:flex-row px-8 text-center py-16 h-full gap-8 items-start lg:items-center lg:p-0 text-lg font-medium *:text-left">
                             <li>
                                 <NavLink
                                     className="hover:text-primary duration-300"

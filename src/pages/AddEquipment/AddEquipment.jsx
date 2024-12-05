@@ -44,10 +44,13 @@ const AddEquipment = () => {
     };
 
     return (
-        <div>
-            <h2>Add Your Equipment </h2>
-            <div>
-                <form onSubmit={handleAddEquipment}>
+        <div className="wrapper bg-slate-200 dark:bg-darkPurple p-8 mb-12 rounded-xl !max-w-4xl w-full">
+            <h2 className="text-center text-4xl font-bold">Add Your Equipment </h2>
+            <div className="max-w-3xl w-full mx-auto mt-12">
+                <form
+                    className="grid grid-cols-2 gap-4"
+                    onSubmit={handleAddEquipment}
+                >
                     <div className="hidden">
                         <label htmlFor="username">
                             <span>User Name:</span>
@@ -73,9 +76,10 @@ const AddEquipment = () => {
                         </label>
                     </div>
                     <div>
-                        <label htmlFor="name">
-                            <span>Item Name:</span>
+                        <label className="flex flex-col gap-2" htmlFor="name">
+                            <span className="font-semibold">Item Name:</span>
                             <input
+                                className="w-full px-4 py-2 rounded-lg text-darkBg focus:outline-primary"
                                 type="text"
                                 name="name"
                                 id="name"
@@ -84,9 +88,10 @@ const AddEquipment = () => {
                         </label>
                     </div>
                     <div>
-                        <label htmlFor="category">
-                            <span>Category Name:</span>
+                        <label className="flex flex-col gap-2" htmlFor="category">
+                            <span className="font-semibold">Category Name:</span>
                             <input
+                                className="w-full px-4 py-2 rounded-lg text-darkBg focus:outline-primary"
                                 type="text"
                                 name="category"
                                 id="category"
@@ -95,9 +100,10 @@ const AddEquipment = () => {
                         </label>
                     </div>
                     <div>
-                        <label htmlFor="price">
-                            <span>Item Price:</span>
+                        <label className="flex flex-col gap-2" htmlFor="price">
+                            <span className="font-semibold">Item Price:</span>
                             <input
+                                className="w-full px-4 py-2 rounded-lg text-darkBg focus:outline-primary"
                                 type="text"
                                 name="price"
                                 id="price"
@@ -106,9 +112,10 @@ const AddEquipment = () => {
                         </label>
                     </div>
                     <div>
-                        <label htmlFor="rating">
-                            <span>Item Rating:</span>
+                        <label className="flex flex-col gap-2" htmlFor="rating">
+                            <span className="font-semibold">Item Rating:</span>
                             <input
+                                className="w-full px-4 py-2 rounded-lg text-darkBg focus:outline-primary"
                                 type="text"
                                 name="rating"
                                 id="rating"
@@ -117,9 +124,10 @@ const AddEquipment = () => {
                         </label>
                     </div>
                     <div>
-                        <label htmlFor="customization">
-                            <span>Item Customization:</span>
+                        <label className="flex flex-col gap-2" htmlFor="customization">
+                            <span className="font-semibold">Item Customization:</span>
                             <input
+                                className="w-full px-4 py-2 rounded-lg text-darkBg focus:outline-primary"
                                 type="text"
                                 name="customization"
                                 id="customization"
@@ -128,9 +136,10 @@ const AddEquipment = () => {
                         </label>
                     </div>
                     <div>
-                        <label htmlFor="deliveryTime">
-                            <span>Delivery Time:</span>
+                        <label className="flex flex-col gap-2" htmlFor="deliveryTime">
+                            <span className="font-semibold">Delivery Time:</span>
                             <input
+                                className="w-full px-4 py-2 rounded-lg text-darkBg focus:outline-primary"
                                 type="text"
                                 name="deliveryTime"
                                 id="deliveryTime"
@@ -139,9 +148,10 @@ const AddEquipment = () => {
                         </label>
                     </div>
                     <div>
-                        <label htmlFor="image">
-                            <span>Item Image:</span>
+                        <label className="flex flex-col gap-2" htmlFor="image">
+                            <span className="font-semibold">Item Image:</span>
                             <input
+                                className="w-full px-4 py-2 rounded-lg text-darkBg focus:outline-primary"
                                 type="text"
                                 name="image"
                                 id="image"
@@ -150,18 +160,19 @@ const AddEquipment = () => {
                         </label>
                     </div>
                     <div>
-                        <label htmlFor="stockAvailability">
-                            <span>Stock Availabitly:</span>
+                        <label className="flex flex-col gap-2" htmlFor="stockAvailability">
+                            <span className="font-semibold">Stock Availabitly:</span>
                             <input
-                                type="radio"
+                                className="w-full px-4 py-2 rounded-lg text-darkBg [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none focus:outline-primary"
+                                type="number"
                                 name="stockAvailability"
                                 id="stockAvailability"
-                                placeholder="Enter your stockAvailability"
+                                placeholder="Enter available stock quantity"
                             />
                         </label>
                     </div>
-                    <div>
-                        <button>Add Equipment</button>
+                    <div className="col-span-full">
+                        <button className="btn w-full">Add Equipment</button>
                     </div>
                 </form>
             </div>
