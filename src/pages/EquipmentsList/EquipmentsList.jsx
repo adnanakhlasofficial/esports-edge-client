@@ -1,8 +1,16 @@
+import { Helmet, HelmetProvider } from "react-helmet-async";
+
 const EquipmentsList = () => {
     return (
-        <div>
-            <h2>Equipment List</h2>
-        </div>
+        <HelmetProvider>
+            <div>
+                <Helmet>
+                    <title>Equipment List | Sport Edge</title>
+                    <link rel="canonical" href="https://www.tacobell.com/" />
+                </Helmet>
+                <h2>Equipment List</h2>
+            </div>
+        </HelmetProvider>
     );
 };
 

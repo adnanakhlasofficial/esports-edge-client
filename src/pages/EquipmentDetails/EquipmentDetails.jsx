@@ -3,6 +3,8 @@ import Banner from "../../components/Banner/Banner";
 import ReactStars from "react-rating-stars-component";
 import { useContext } from "react";
 import { AuthContext } from "../../provider/AuthProvider/AuthProvider";
+import productBg from "../../assets/img/product.jpg";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
 const EquipmentDetails = () => {
     const { user } = useContext(AuthContext);
@@ -12,18 +14,26 @@ const EquipmentDetails = () => {
     console.log(id);
 
     return (
-        <>
+        <HelmetProvider>
+            <Helmet>
+                <title>Equipment Details | Sport Edge</title>
+                <link rel="canonical" href="https://www.tacobell.com/" />
+            </Helmet>
             <div>
-                <Banner title={"Product Details"} desc={data.name}></Banner>
+                <Banner
+                    title={"Product Details"}
+                    desc={data.name}
+                    img={productBg}
+                ></Banner>
             </div>
 
-            <div className="wrapper !max-w-3xl w-full bg-slate-200 dark:bg-slate-800  my-12 flex justify-center gap-16 items-center rounded-3xl bg-off-white p-8">
-                <div className="h-72">
+            <div className="wrapper !max-w-3xl w-full bg-slate-200 dark:bg-[#161838]  my-12 flex justify-between gap-16 items-center rounded-3xl bg-off-white !px-20 !py-16">
+                <div className="h-72 w-full">
                     <img className="h-full" src={data.image} alt="" />
                 </div>
 
-                <div className="space-y-4 h-1/2">
-                    <div className="!text-darkText">
+                <div className="space-y-4 w-full">
+                    <div className="dark:!text-darkText text-darkBg">
                         <p>{data.username}</p>
                         <p>{data.useremail}</p>
                     </div>
@@ -64,13 +74,17 @@ const EquipmentDetails = () => {
                     </div>
 
                     {user && data.useremail && (
-                        <div>
-                            <Link to={`/updateEquipment/${id}`}><button className="btn w-full">Update Details</button></Link>
+                        <div className="w-full">
+                            <Link to={`/updateEquipment/${id}`}>
+                                <button className="btn w-full">
+                                    Update Details
+                                </button>
+                            </Link>
                         </div>
                     )}
                 </div>
             </div>
-        </>
+        </HelmetProvider>
     );
 };
 

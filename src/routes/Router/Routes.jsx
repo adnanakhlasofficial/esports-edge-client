@@ -60,15 +60,15 @@ const router = createBrowserRouter([
                 loader: ({ params }) =>
                     fetch(`http://localhost:5000/equipment/${params.id}`),
             },
+            {
+                path: "/signin",
+                element: <SignIn></SignIn>,
+            },
+            {
+                path: "/signup",
+                element: <SignUp></SignUp>,
+            },
         ],
-    },
-    {
-        path: "/signin",
-        element: <SignIn></SignIn>,
-    },
-    {
-        path: "/signup",
-        element: <SignUp></SignUp>,
     },
 ]);
 

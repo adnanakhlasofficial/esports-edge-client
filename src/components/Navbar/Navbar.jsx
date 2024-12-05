@@ -1,10 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { FiSun } from "react-icons/fi";
-import { FaMoon } from "react-icons/fa";
+import { FaBars, FaMoon } from "react-icons/fa";
 import { AuthContext } from "../../provider/AuthProvider/AuthProvider";
 import logoDark from "/images/logo-dark.png";
 import logoLight from "/images/logo-light.png";
+import { MdClose } from "react-icons/md";
 
 const Navbar = () => {
     const { user, logoutUser } = useContext(AuthContext);
@@ -41,7 +42,7 @@ const Navbar = () => {
 
     return (
         <nav>
-            <section className="wrapper relative flex justify-between items-center py-6">
+            <section className="wrapper relative flex justify-between items-center py-6 ">
                 <div>
                     <h2 className="text-4xl font-bold">
                         <img
@@ -60,7 +61,7 @@ const Navbar = () => {
                                 src={user?.photoURL}
                                 alt=""
                             />
-                            <div className="absolute z-20 bg-slate-200 dark:bg-darkPurple px-8 py-6 transition-all duration-300 -top-52 group-hover:top-full right-0 rounded-lg space-y-6">
+                            <div className="absolute z-20 bg-slate-200 dark:bg-[#1c1e43] px-8 py-6 transition-all duration-300 -top-52 group-hover:top-full right-0 rounded-lg space-y-6">
                                 <div className="space-y-2">
                                     <h2 className="text-lg">
                                         {user?.displayName}
@@ -90,14 +91,14 @@ const Navbar = () => {
                         </button>
                     </div>
                     <div className="order-4 lg:hidden relative z-50">
-                        <button onClick={() => setNavStatus(!navStatus)}>
-                            {navStatus ? "close" : "open"}
+                        <button className="transition-all duration-300 text-primary" onClick={() => setNavStatus(!navStatus)}>
+                            {navStatus ? <MdClose size={50} /> : <FaBars size={50} />}
                         </button>
                     </div>
                     <div
                         className={`absolute z-40 bg-slate-200 dark:bg-darkPurple lg:bg-inherit lg:dark:bg-inherit ${
-                            navStatus ? "left-0" : "-left-full"
-                        } transition-all duration-300 top-0 w-[40vh] h-screen lg:h-auto lg:w-auto lg:static `}
+                            navStatus ? "left-0" : "-left-[100rem]"
+                        } transition-all duration-300 top-0 w-[60vh] h-screen lg:h-auto lg:w-auto lg:static `}
                     >
                         <ul className="flex flex-col lg:flex-row px-8 text-center py-16 h-full gap-8 items-start lg:items-center lg:p-0 text-lg font-medium *:text-left">
                             <li>
@@ -134,8 +135,8 @@ const Navbar = () => {
                             </li>
                             {!user && (
                                 <li>
-                                    <NavLink className="btn" to={"/signin"}>
-                                        Login
+                                    <NavLink to={"/signin"}>
+                                        <button className="btn w-full" >Login</button>
                                     </NavLink>
                                 </li>
                             )}
