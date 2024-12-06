@@ -1,4 +1,4 @@
-import { Link, useLoaderData, useParams } from "react-router-dom";
+import { Link, useLoaderData, useNavigate, useParams } from "react-router-dom";
 import Banner from "../../components/Banner/Banner";
 import ReactStars from "react-rating-stars-component";
 import { useContext } from "react";
@@ -12,6 +12,7 @@ const EquipmentDetails = () => {
     console.log(data);
     const { id } = useParams();
     console.log(id);
+    const navigate = useNavigate();
 
     return (
         <HelmetProvider>
@@ -25,6 +26,10 @@ const EquipmentDetails = () => {
                     desc={data.name}
                     img={productBg}
                 ></Banner>
+            </div>
+
+            <div className="wrapper">
+                <button className="btn mt-16 w-56" onClick={() => navigate(-1)}>Go Back</button>
             </div>
 
             <div className="wrapper !max-w-3xl w-full bg-slate-200 dark:bg-[#161838]  my-12 flex flex-col lg:flex-row justify-between gap-16 items-center rounded-3xl bg-off-white !px-20 !py-16">
@@ -74,12 +79,15 @@ const EquipmentDetails = () => {
                     </div>
 
                     {user.email === data.useremail && (
-                        <div className="w-full">
+                        <div className="w-full space-y-4">
                             <Link to={`/updateEquipment/${id}`}>
                                 <button className="btn w-full">
                                     Update Details
                                 </button>
                             </Link>
+                            <button className="btn w-full !border-red-500  before:bg-red-500">
+                                Remove Equipment
+                            </button>
                         </div>
                     )}
                 </div>

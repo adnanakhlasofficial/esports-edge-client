@@ -144,7 +144,7 @@ const Navbar = () => {
                                     className="hover:text-primary duration-300"
                                     to={"/equipments-list"}
                                 >
-                                    My Equipment List
+                                    My Equipments
                                 </NavLink>
                             </li>
                             {!user && (
