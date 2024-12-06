@@ -39,7 +39,7 @@ const EquipmentsList = () => {
                     <div className="wrapper my-20">
                         <table className="w-full text-left">
                             <thead>
-                                <tr className="border-2 divide-x-2 *:px-2 *:py-2">
+                                <tr className="*:px-2 *:py-2">
                                     <th></th>
                                     <th>Name</th>
                                     <th>Price</th>
@@ -52,7 +52,7 @@ const EquipmentsList = () => {
                                 {equipments.map((equipment, idx) => (
                                     <tr
                                         key={equipment._id}
-                                        className="border-2 divide-x-2 *:px-2 *:py-3"
+                                        className="divide-y-2 divide-gray-200 dark:divide-gray-700  *:px-2 *:py-3 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors duration-300"
                                     >
                                         <th className="text-right">
                                             {idx + 1}

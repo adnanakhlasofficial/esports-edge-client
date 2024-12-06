@@ -2,6 +2,7 @@ import { useLoaderData } from "react-router-dom";
 import BannerSlider from "../../components/BannerSlider/BannerSlider";
 import EquipmentCard from "../../components/EquipmentCard/EquipmentCard";
 import { Helmet, HelmetProvider } from "react-helmet-async";
+import Services from "../../components/Services/Services";
 
 const Home = () => {
     const equipments = useLoaderData();
@@ -24,6 +25,10 @@ const Home = () => {
                         ></EquipmentCard>
                     ))}
                 </div>
+
+                <section>
+                    <Services></Services>
+                </section>
             </div>
         </HelmetProvider>
     );
