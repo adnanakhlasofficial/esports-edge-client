@@ -62,7 +62,7 @@ const Navbar = () => {
                                 src={user?.photoURL}
                                 alt=""
                             />
-                            <div className="absolute z-20 bg-slate-200 dark:bg-[#1c1e43] px-8 py-6 transition-all duration-300 -top-52 group-hover:top-full right-0 rounded-lg space-y-6">
+                            <div className="absolute z-20 bg-slate-300 dark:bg-[#1c1e43] px-8 py-6 transition-all duration-300 -top-52 group-hover:top-full right-0 rounded-lg space-y-6">
                                 <div className="space-y-2">
                                     <h2 className="text-lg">
                                         {user?.displayName}
@@ -128,7 +128,7 @@ const Navbar = () => {
                                     className="hover:text-primary duration-300"
                                     to={"/sports-equipment"}
                                 >
-                                    All Sports Equipment
+                                    All Equipments
                                 </NavLink>
                             </li>
                             <li>

@@ -3,7 +3,7 @@ import { Helmet, HelmetProvider } from "react-helmet-async";
 const EquipmentsList = () => {
     return (
         <HelmetProvider>
-            <div>
+            <div className="wrapper">
                 <Helmet>
                     <title>Equipment List | Sport Edge</title>
                     <link rel="canonical" href="https://www.tacobell.com/" />
