@@ -5,9 +5,20 @@ import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 
 const SignUp = () => {
-    const { createUser, updateUser, setLoading } = useContext(AuthContext);
+    const { createUser, updateUser, setLoading, googleLogin } = useContext(AuthContext);
     const [viewPassword, setViewPassword] = useState(false);
     const navigate = useNavigate();
+
+    const handleGoogleSignUp = () => {
+        googleLogin()
+            .then((user) => {
+                console.log(user);
+                navigate("/");
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
 
     const handleSignUp = (e) => {
         e.preventDefault();
@@ -132,6 +143,14 @@ const SignUp = () => {
                                 </button>
                             </div>
                         </form>
+                        <div className="my-6">
+                            <button
+                                onClick={handleGoogleSignUp}
+                                className="btn w-full"
+                            >
+                                Sign Up with Google
+                            </button>
+                        </div>
                         <div>
                             <p className="text-lg font-medium mt-4 text-center">
                                 Already have an account?{" "}

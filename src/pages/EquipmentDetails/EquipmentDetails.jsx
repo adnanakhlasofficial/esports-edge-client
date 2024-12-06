@@ -73,7 +73,7 @@ const EquipmentDetails = () => {
                         </div>
                     </div>
 
-                    {user && data.useremail && (
+                    {user.email === data.useremail && (
                         <div className="w-full">
                             <Link to={`/updateEquipment/${id}`}>
                                 <button className="btn w-full">

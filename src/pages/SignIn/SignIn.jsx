@@ -5,11 +5,22 @@ import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 
 const SignIn = () => {
-    const { loginUser } = useContext(AuthContext);
+    const { loginUser, googleLogin } = useContext(AuthContext);
     const navigate = useNavigate();
     const { state } = useLocation();
     console.log(state);
     const [viewPassword, setViewPassword] = useState(false);
+
+    const handleGoogleSignIn = () => {
+        googleLogin()
+            .then((user) => {
+                console.log(user);
+                navigate(state ? state : "/");
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
 
     const handleSignIn = (e) => {
         e.preventDefault();
@@ -35,7 +46,7 @@ const SignIn = () => {
                 <title>Sign In | Sport Edge</title>
                 <link rel="canonical" href="https://www.tacobell.com/" />
             </Helmet>
-            <section className="w-screen min-h-screen grid place-items-center">
+            <section className="w-full min-h-screen grid place-items-center">
                 <div className="wrapper bg-slate-200 dark:bg-darkPurple !p-8 my-12 rounded-xl !max-w-xl w-full dark:*:text-slate-200">
                     <h2 className="text-center text-4xl font-bold">Sign In</h2>
                     <div className="max-w-3xl w-full mx-auto mt-12">
@@ -82,9 +93,15 @@ const SignIn = () => {
                                             }
                                         >
                                             {viewPassword ? (
-                                                <FaRegEyeSlash className="text-darkBg" size={24} />
+                                                <FaRegEyeSlash
+                                                    className="text-darkBg"
+                                                    size={24}
+                                                />
                                             ) : (
-                                                <FaRegEye className="text-darkBg" size={24} />
+                                                <FaRegEye
+                                                    className="text-darkBg"
+                                                    size={24}
+                                                />
                                             )}
                                         </span>
                                     }
@@ -96,6 +113,14 @@ const SignIn = () => {
                                 </button>
                             </div>
                         </form>
+                        <div className="my-6">
+                            <button
+                                onClick={handleGoogleSignIn}
+                                className="btn w-full"
+                            >
+                                Sign In with Google
+                            </button>
+                        </div>
                         <div>
                             <p className="text-lg font-medium mt-4 text-center">
                                 Don&apos;t have an account?{" "}
