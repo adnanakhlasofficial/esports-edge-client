@@ -27,7 +27,7 @@ const EquipmentDetails = () => {
                 ></Banner>
             </div>
 
-            <div className="wrapper !max-w-3xl w-full bg-slate-200 dark:bg-[#161838]  my-12 flex justify-between gap-16 items-center rounded-3xl bg-off-white !px-20 !py-16">
+            <div className="wrapper !max-w-3xl w-full bg-slate-200 dark:bg-[#161838]  my-12 flex flex-col lg:flex-row justify-between gap-16 items-center rounded-3xl bg-off-white !px-20 !py-16">
                 <div className="h-72 w-full">
                     <img className="h-full" src={data.image} alt="" />
                 </div>

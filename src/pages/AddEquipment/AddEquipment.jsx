@@ -59,7 +59,7 @@ const AddEquipment = () => {
                 </h2>
                 <div className="max-w-3xl w-full mx-auto mt-12">
                     <form
-                        className="grid grid-cols-2 gap-4"
+                        className="grid grid-cols-1 md:grid-cols-2 gap-4"
                         onSubmit={handleAddEquipment}
                     >
                         <div className="hidden">

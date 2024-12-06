@@ -16,7 +16,7 @@ const Home = () => {
                 </Helmet>
                 <BannerSlider></BannerSlider>
 
-                <div className="wrapper my-12 grid justify-items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                <div className="wrapper my-12 grid justify-items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {equipments.slice(0, 6).map((equipment) => (
                         <EquipmentCard
                             key={equipment._id}

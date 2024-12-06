@@ -1,11 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { FiSun } from "react-icons/fi";
-import { FaBars, FaMoon } from "react-icons/fa";
+import { FaMoon } from "react-icons/fa";
 import { AuthContext } from "../../provider/AuthProvider/AuthProvider";
 import logoDark from "/images/logo-dark.png";
 import logoLight from "/images/logo-light.png";
 import { MdClose } from "react-icons/md";
+import { HiBars3 } from "react-icons/hi2";
 
 const Navbar = () => {
     const { user, logoutUser } = useContext(AuthContext);
@@ -104,7 +105,7 @@ const Navbar = () => {
                             {navStatus ? (
                                 <MdClose size={50} />
                             ) : (
-                                <FaBars size={50} />
+                                <HiBars3 size={50} />
                             )}
                         </button>
                     </div>

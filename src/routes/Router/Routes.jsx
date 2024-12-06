@@ -9,11 +9,13 @@ import SecureRoute from "../SecureRoute/SecureRoute";
 import SignIn from "../../pages/SignIn/SignIn";
 import EquipmentDetails from "../../pages/EquipmentDetails/EquipmentDetails";
 import UpdateEquipment from "../../pages/UpdateEquipment/UpdateEquipment";
+import Error from "../../pages/Error/Error";
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: <Root></Root>,
+        errorElement: <Error></Error>,
         children: [
             {
                 path: "/",

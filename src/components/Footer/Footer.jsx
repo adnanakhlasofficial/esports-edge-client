@@ -12,7 +12,7 @@ import { FaLocationDot } from "react-icons/fa6";
 
 const Footer = () => {
     return (
-        <section className="wrapper py-20 flex justify-between ">
+        <section className="wrapper py-20 gap-16 flex justify-between flex-col lg:flex-row">
             <div>
                 <img className="w-24" src={logo} alt="" />
                 <div className="space-y-2">
