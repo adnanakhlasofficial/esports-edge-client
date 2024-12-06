@@ -81,8 +81,14 @@ const Navbar = () => {
                             </div>
                         </span>
                     )}
-                    <div className="order-2 fixed bottom-6 right-6 w-12 h-12 flex justify-center items-center bg-primary rounded-full z-50">
-                        <button onClick={changeTheme}>
+                    <div className="order-2 fixed bottom-6 right-6 z-50">
+                        <button
+                            data-tooltip-id="my-tooltip"
+                            data-tooltip-content={mode === "light" ? "Dark Mode" : "Light Mode"}
+                            data-tooltip-place="left"
+                            className="w-12 h-12 flex justify-center items-center bg-primary rounded-full"
+                            onClick={changeTheme}
+                        >
                             {mode === "light" ? (
                                 <FaMoon className="text-white" size={24} />
                             ) : (
@@ -91,8 +97,15 @@ const Navbar = () => {
                         </button>
                     </div>
                     <div className="order-4 lg:hidden relative z-50">
-                        <button className="transition-all duration-300 text-primary" onClick={() => setNavStatus(!navStatus)}>
-                            {navStatus ? <MdClose size={50} /> : <FaBars size={50} />}
+                        <button
+                            className="transition-all duration-300 text-primary"
+                            onClick={() => setNavStatus(!navStatus)}
+                        >
+                            {navStatus ? (
+                                <MdClose size={50} />
+                            ) : (
+                                <FaBars size={50} />
+                            )}
                         </button>
                     </div>
                     <div
@@ -136,7 +149,9 @@ const Navbar = () => {
                             {!user && (
                                 <li>
                                     <NavLink to={"/signin"}>
-                                        <button className="btn w-full" >Login</button>
+                                        <button className="btn w-full">
+                                            Login
+                                        </button>
                                     </NavLink>
                                 </li>
                             )}

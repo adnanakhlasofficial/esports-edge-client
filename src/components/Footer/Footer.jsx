@@ -25,34 +25,72 @@ const Footer = () => {
                 </div>
             </div>
             <div className="space-y-12">
-                <div className="flex gap-4">
-                    <Link to={"#"}>
-                        <FaFacebook className="text-darkPurple" size={40} />
+                <div className="flex gap-8">
+                    <Link
+                        data-tooltip-id="my-tooltip"
+                        data-tooltip-content="Join Facebook"
+                        data-tooltip-place="top"
+                        to={"#"}
+                    >
+                        <FaFacebook
+                            className="text-darkPurple dark:text-slate-300"
+                            size={40}
+                        />
                     </Link>
-                    <Link to={"#"}>
-                        <FaTwitter className="text-darkPurple" size={40} />
+                    <Link
+                        data-tooltip-id="my-tooltip"
+                        data-tooltip-content="Join Twitter"
+                        data-tooltip-place="top"
+                        to={"#"}
+                    >
+                        <FaTwitter
+                            className="text-darkPurple dark:text-slate-300"
+                            size={40}
+                        />
                     </Link>
-                    <Link to={"#"}>
-                        <FaInstagram className="text-darkPurple" size={40} />
+                    <Link
+                        data-tooltip-id="my-tooltip"
+                        data-tooltip-content="Join Instagram"
+                        data-tooltip-place="top"
+                        to={"#"}
+                    >
+                        <FaInstagram
+                            className="text-darkPurple dark:text-slate-300"
+                            size={40}
+                        />
                     </Link>
-                    <Link to={"#"}>
-                        <FaLinkedin className="text-darkPurple" size={40} />
+                    <Link
+                        data-tooltip-id="my-tooltip"
+                        data-tooltip-content="Join LinkedIn"
+                        data-tooltip-place="top"
+                        to={"#"}
+                    >
+                        <FaLinkedin
+                            className="text-darkPurple dark:text-slate-300"
+                            size={40}
+                        />
                     </Link>
                 </div>
                 <div>
                     <h2 className="text-4xl font-bold">Get in Touch</h2>
                     <div className="space-y-3 mt-6">
                         <p className="flex items-center text-lg gap-2">
-                            <MdCall className="text-darkPurple" size={24} />{" "}
+                            <MdCall
+                                className="text-darkPurple dark:text-slate-300"
+                                size={24}
+                            />{" "}
                             +880 1672 478515
                         </p>
                         <p className="flex items-center text-lg gap-2">
-                            <FaEnvelope className="text-darkPurple" size={24} />{" "}
+                            <FaEnvelope
+                                className="text-darkPurple dark:text-slate-300"
+                                size={24}
+                            />{" "}
                             info@gmail.com
                         </p>
                         <p className="flex items-center text-lg gap-2">
                             <FaLocationDot
-                                className="text-darkPurple"
+                                className="text-darkPurple dark:text-slate-300"
                                 size={24}
                             />{" "}
                             72, Wall street, King Road, Dhaka
