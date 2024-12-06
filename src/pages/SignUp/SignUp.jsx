@@ -3,9 +3,11 @@ import { AuthContext } from "../../provider/AuthProvider/AuthProvider";
 import { Link, useNavigate } from "react-router-dom";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { Helmet, HelmetProvider } from "react-helmet-async";
+import Swal from "sweetalert2";
 
 const SignUp = () => {
-    const { createUser, updateUser, setLoading, googleLogin } = useContext(AuthContext);
+    const { createUser, updateUser, setLoading, googleLogin } =
+        useContext(AuthContext);
     const [viewPassword, setViewPassword] = useState(false);
     const navigate = useNavigate();
 
@@ -13,7 +15,18 @@ const SignUp = () => {
         googleLogin()
             .then((user) => {
                 console.log(user);
-                navigate("/");
+                setLoading(false);
+                Swal.fire({
+                    title: "Account Created!",
+                    text: "Your account has been successfully created. Welcome aboard!",
+                    icon: "success",
+                    confirmButtonColor: "#3085d6",
+                    confirmButtonText: "Start Exploring",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        navigate("/");
+                    }
+                });
             })
             .catch((error) => {
                 console.log(error);
@@ -23,11 +36,22 @@ const SignUp = () => {
     const handleSignUp = (e) => {
         e.preventDefault();
 
+        const passRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+
         const form = e.target;
         const displayName = form.name.value;
         const email = form.email.value;
         const photoURL = form.photo.value;
         const password = form.password.value;
+
+        if (!passRegex.test(password))
+            return Swal.fire({
+                title: "Invalid Password",
+                text: "Password must contain at least one uppercase letter, one lowercase letter, and be at least 6 characters long.",
+                icon: "error",
+                confirmButtonColor: "#3085d6",
+                confirmButtonText: "Try Again",
+            });
 
         const newUser = { displayName, email, photoURL, password };
         console.log(newUser);
@@ -36,10 +60,26 @@ const SignUp = () => {
                 const user = userCredential.user;
                 updateUser({ displayName, photoURL });
                 console.log(user);
-                navigate("/");
                 setLoading(false);
+                Swal.fire({
+                    title: "Account Created!",
+                    text: "Your account has been successfully created. Welcome aboard!",
+                    icon: "success",
+                    confirmButtonColor: "#3085d6",
+                    confirmButtonText: "Start Exploring",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        navigate("/");
+                    }
+                });
             })
-            .catch((error) => console.log(error));
+            .catch((error) => {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: error.code,
+                });
+            });
     };
 
     return (
@@ -48,7 +88,7 @@ const SignUp = () => {
                 <title>Sign Up | Sport Edge</title>
                 <link rel="canonical" href="https://www.tacobell.com/" />
             </Helmet>
-            <section className="w-screen min-h-screen grid place-items-center">
+            <section className="w-full min-h-screen grid place-items-center">
                 <div className="wrapper bg-slate-200 dark:bg-darkPurple !p-8 my-12 rounded-xl !max-w-xl w-full ">
                     <h2 className="text-center text-4xl font-bold">Sign Up</h2>
                     <div className="max-w-3xl w-full mx-auto mt-12">
@@ -62,6 +102,7 @@ const SignUp = () => {
                                         name:
                                     </span>
                                     <input
+                                        required
                                         className="w-full px-4 py-2 rounded-lg text-darkBg focus:outline-primary"
                                         type="text"
                                         name="name"
@@ -79,6 +120,7 @@ const SignUp = () => {
                                         email:
                                     </span>
                                     <input
+                                        required
                                         className="w-full px-4 py-2 rounded-lg text-darkBg focus:outline-primary"
                                         type="email"
                                         name="email"
@@ -96,6 +138,7 @@ const SignUp = () => {
                                         photo:
                                     </span>
                                     <input
+                                        required
                                         className="w-full px-4 py-2 rounded-lg text-darkBg focus:outline-primary"
                                         type="url"
                                         name="photo"
@@ -113,6 +156,7 @@ const SignUp = () => {
                                         password:
                                     </span>
                                     <input
+                                        required
                                         className="w-full px-4 py-2 rounded-lg text-darkBg focus:outline-primary"
                                         type={
                                             viewPassword ? "text" : "password"
@@ -129,9 +173,15 @@ const SignUp = () => {
                                             }
                                         >
                                             {viewPassword ? (
-                                                <FaRegEyeSlash className="text-darkBg" size={24} />
+                                                <FaRegEyeSlash
+                                                    className="text-darkBg"
+                                                    size={24}
+                                                />
                                             ) : (
-                                                <FaRegEye className="text-darkBg" size={24} />
+                                                <FaRegEye
+                                                    className="text-darkBg"
+                                                    size={24}
+                                                />
                                             )}
                                         </span>
                                     }

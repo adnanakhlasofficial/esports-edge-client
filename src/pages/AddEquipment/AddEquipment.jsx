@@ -22,6 +22,8 @@ const AddEquipment = () => {
         const stockAvailability = parseInt(form.stockAvailability.value)
             ? true
             : false;
+        
+        const description = form.description.value;
 
         const itemInfo = {
             username,
@@ -34,6 +36,7 @@ const AddEquipment = () => {
             deliveryTime,
             image,
             stockAvailability,
+            description
         };
 
         console.log(itemInfo);

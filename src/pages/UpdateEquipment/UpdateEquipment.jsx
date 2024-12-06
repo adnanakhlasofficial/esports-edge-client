@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../provider/AuthProvider/AuthProvider";
 import { useLoaderData, useParams } from "react-router-dom";
 import { Helmet, HelmetProvider } from "react-helmet-async";
+import Swal from "sweetalert2";
 
 const UpdateEquipment = () => {
     const { user } = useContext(AuthContext);
@@ -26,6 +27,8 @@ const UpdateEquipment = () => {
             ? true
             : false;
 
+        const description = form.description.value;
+
         const itemInfo = {
             username,
             useremail,
@@ -37,9 +40,48 @@ const UpdateEquipment = () => {
             deliveryTime,
             image,
             stockAvailability,
+            description,
         };
 
-        console.log(itemInfo);
+        Swal.fire({
+            title: "Are you sure?",
+            text: "Do you want to update the equipment details?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, update it!",
+            cancelButtonText: "No, cancel",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`http://localhost:5000/updateEquipment/${id}`, {
+                    method: "PUT",
+                    headers: {
+                        "content-type": "application/json",
+                    },
+                    body: JSON.stringify(itemInfo),
+                })
+                    .then((res) => res.json())
+                    .then((data) => {
+                        console.log(data);
+                        Swal.fire({
+                            title: "Updated!",
+                            text: "The equipment details have been successfully updated.",
+                            icon: "success",
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
+                        });
+                        form.reset();
+                    })
+                    .catch((error) => {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Oops...",
+                            text: error,
+                        });
+                    });
+            }
+        });
     };
 
     return (
@@ -86,9 +128,7 @@ const UpdateEquipment = () => {
                                 className="flex flex-col gap-2"
                                 htmlFor="name"
                             >
-                                <span className="font-semibold">
-                                    Name:
-                                </span>
+                                <span className="font-semibold">Name:</span>
                                 <input
                                     className="w-full px-4 py-2 rounded-lg text-darkBg focus:outline-primary"
                                     type="text"
@@ -104,9 +144,7 @@ const UpdateEquipment = () => {
                                 className="flex flex-col gap-2"
                                 htmlFor="category"
                             >
-                                <span className="font-semibold">
-                                    Category:
-                                </span>
+                                <span className="font-semibold">Category:</span>
                                 <input
                                     className="w-full px-4 py-2 rounded-lg text-darkBg focus:outline-primary"
                                     type="text"
@@ -122,9 +160,7 @@ const UpdateEquipment = () => {
                                 className="flex flex-col gap-2"
                                 htmlFor="price"
                             >
-                                <span className="font-semibold">
-                                    Price:
-                                </span>
+                                <span className="font-semibold">Price:</span>
                                 <input
                                     className="w-full px-4 py-2 rounded-lg text-darkBg focus:outline-primary"
                                     type="text"
@@ -140,9 +176,7 @@ const UpdateEquipment = () => {
                                 className="flex flex-col gap-2"
                                 htmlFor="rating"
                             >
-                                <span className="font-semibold">
-                                    Rating:
-                                </span>
+                                <span className="font-semibold">Rating:</span>
                                 <input
                                     className="w-full px-4 py-2 rounded-lg text-darkBg focus:outline-primary"
                                     type="text"
@@ -183,7 +217,7 @@ const UpdateEquipment = () => {
                                     className="w-full px-4 py-2 rounded-lg text-darkBg focus:outline-primary"
                                     type="text"
                                     name="deliveryTime"
-                                    defaultChecked={data.deliveryTime}
+                                    defaultValue={data.deliveryTime}
                                     id="deliveryTime"
                                     placeholder="Enter your delivery time"
                                 />
@@ -194,9 +228,7 @@ const UpdateEquipment = () => {
                                 className="flex flex-col gap-2"
                                 htmlFor="image"
                             >
-                                <span className="font-semibold">
-                                    Image:
-                                </span>
+                                <span className="font-semibold">Image:</span>
                                 <input
                                     className="w-full px-4 py-2 rounded-lg text-darkBg focus:outline-primary"
                                     type="text"
@@ -237,6 +269,7 @@ const UpdateEquipment = () => {
                                 <textarea
                                     rows={6}
                                     className="w-full px-4 py-2 rounded-lg text-darkBg focus:outline-primary"
+                                    defaultValue={data.description}
                                     name="description"
                                     id="description"
                                     placeholder="Enter equipment description"

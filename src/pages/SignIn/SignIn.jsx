@@ -3,6 +3,7 @@ import { AuthContext } from "../../provider/AuthProvider/AuthProvider";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { Helmet, HelmetProvider } from "react-helmet-async";
+import Swal from "sweetalert2";
 
 const SignIn = () => {
     const { loginUser, googleLogin } = useContext(AuthContext);
@@ -15,7 +16,17 @@ const SignIn = () => {
         googleLogin()
             .then((user) => {
                 console.log(user);
-                navigate(state ? state : "/");
+                Swal.fire({
+                    title: "Welcome Back!",
+                    text: "You have successfully logged in.",
+                    icon: "success",
+                    confirmButtonColor: "#3085d6",
+                    confirmButtonText: "OK",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        navigate(state ? state : "/");
+                    }
+                });
             })
             .catch((error) => {
                 console.log(error);
@@ -33,10 +44,24 @@ const SignIn = () => {
         loginUser(email, password)
             .then((user) => {
                 console.log(user);
-                navigate(state ? state : "/");
+                Swal.fire({
+                    title: "Welcome Back!",
+                    text: "You have successfully logged in.",
+                    icon: "success",
+                    confirmButtonColor: "#3085d6",
+                    confirmButtonText: "OK",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        navigate(state ? state : "/");
+                    }
+                });
             })
             .catch((error) => {
-                console.log(error);
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: error.code,
+                });
             });
     };
 
@@ -60,8 +85,9 @@ const SignIn = () => {
                                         email:
                                     </span>
                                     <input
+                                        required
                                         className="w-full px-4 py-2 rounded-lg text-darkBg focus:outline-primary"
-                                        type="text"
+                                        type="email"
                                         name="email"
                                         id="email"
                                         placeholder="Enter your email"
@@ -77,6 +103,7 @@ const SignIn = () => {
                                         password:
                                     </span>
                                     <input
+                                        required
                                         className="w-full px-4 py-2 rounded-lg text-darkBg focus:outline-primary"
                                         type={
                                             viewPassword ? "text" : "password"
