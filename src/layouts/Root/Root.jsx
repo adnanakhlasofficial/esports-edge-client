@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 import { useContext } from "react";
 import { AuthContext } from "../../provider/AuthProvider/AuthProvider";
+import Footer from "../../components/Footer/Footer";
 
 const Root = () => {
     const {loading} = useContext(AuthContext);
@@ -17,7 +18,7 @@ const Root = () => {
                 <Outlet></Outlet>
             </main>
             <footer className="dark:bg-[#161838] bg-slate-200">
-                footer  
+                <Footer></Footer>
             </footer>
         </div>
     );
