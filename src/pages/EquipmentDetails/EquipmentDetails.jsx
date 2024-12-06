@@ -24,7 +24,7 @@ const EquipmentDetails = () => {
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
             confirmButtonText: "Yes, remove it!",
-            cancelButtonText: 'No, keep it'
+            cancelButtonText: "No, keep it",
         }).then((result) => {
             if (result.isConfirmed) {
                 fetch(`http://localhost:5000/equipment/${id}`, {
@@ -33,13 +33,19 @@ const EquipmentDetails = () => {
                     .then((res) => res.json())
                     .then((data) => {
                         console.log(data);
+                        Swal.fire({
+                            title: "Removed!",
+                            text: "Your file has been deleted.",
+                            icon: "success",
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                navigate("/");
+                            }
+                        });
                     })
                     .catch((error) => console.log(error));
-                Swal.fire({
-                    title: "Removed!",
-                    text: "Your file has been deleted.",
-                    icon: "success",
-                });
             }
         });
     };
