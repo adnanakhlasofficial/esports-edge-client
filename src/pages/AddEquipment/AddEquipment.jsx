@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { AuthContext } from "../../provider/AuthProvider/AuthProvider";
 import { Helmet, HelmetProvider } from "react-helmet-async";
+import Swal from "sweetalert2";
 
 const AddEquipment = () => {
     const { user } = useContext(AuthContext);
@@ -18,10 +19,10 @@ const AddEquipment = () => {
         const customization = form.customization.value;
         const deliveryTime = form.deliveryTime.value;
         const image = form.image.value;
-        const stockAvailability =
-            parseInt(form.stockAvailability.value) ? true : false;
+        const stockAvailability = parseInt(form.stockAvailability.value)
+            ? true
+            : false;
 
-            console.log(stockAvailability);
         const itemInfo = {
             username,
             useremail,
@@ -36,15 +37,39 @@ const AddEquipment = () => {
         };
 
         console.log(itemInfo);
-        // fetch("http://localhost:5000/equipments/", {
-        //     method: "POST",
-        //     headers: {
-        //         "content-type": "application/json",
-        //     },
-        //     body: JSON.stringify(itemInfo),
-        // })
-        //     .then((res) => res.json())
-        //     .then((data) => console.log(data));
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: "Do you want to add this product?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, add it!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch("http://localhost:5000/equipments/", {
+                    method: "POST",
+                    headers: {
+                        "content-type": "application/json",
+                    },
+                    body: JSON.stringify(itemInfo),
+                })
+                    .then((res) => res.json())
+                    .then((data) => {
+                        console.log(data);
+                        Swal.fire({
+                            title: "Added!",
+                            text: "Your product has been added.",
+                            icon: "success",
+                        });
+                        form.reset();
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            }
+        });
     };
 
     return (
@@ -66,6 +91,7 @@ const AddEquipment = () => {
                             <label htmlFor="username">
                                 <span>User Name:</span>
                                 <input
+                                    required
                                     type="text"
                                     defaultValue={user.displayName}
                                     name="username"
@@ -78,6 +104,7 @@ const AddEquipment = () => {
                             <label htmlFor="useremail">
                                 <span>User Email:</span>
                                 <input
+                                    required
                                     type="text"
                                     defaultValue={user.email}
                                     name="useremail"
@@ -91,10 +118,9 @@ const AddEquipment = () => {
                                 className="flex flex-col gap-2"
                                 htmlFor="name"
                             >
-                                <span className="font-semibold">
-                                    Item Name:
-                                </span>
+                                <span className="font-semibold">Name:</span>
                                 <input
+                                    required
                                     className="w-full px-4 py-2 rounded-lg text-darkBg focus:outline-primary"
                                     type="text"
                                     name="name"
@@ -108,10 +134,9 @@ const AddEquipment = () => {
                                 className="flex flex-col gap-2"
                                 htmlFor="category"
                             >
-                                <span className="font-semibold">
-                                    Category Name:
-                                </span>
+                                <span className="font-semibold">Category:</span>
                                 <input
+                                    required
                                     className="w-full px-4 py-2 rounded-lg text-darkBg focus:outline-primary"
                                     type="text"
                                     name="category"
@@ -125,10 +150,9 @@ const AddEquipment = () => {
                                 className="flex flex-col gap-2"
                                 htmlFor="price"
                             >
-                                <span className="font-semibold">
-                                    Item Price:
-                                </span>
+                                <span className="font-semibold">Price:</span>
                                 <input
+                                    required
                                     className="w-full px-4 py-2 rounded-lg text-darkBg focus:outline-primary"
                                     type="text"
                                     name="price"
@@ -142,10 +166,9 @@ const AddEquipment = () => {
                                 className="flex flex-col gap-2"
                                 htmlFor="rating"
                             >
-                                <span className="font-semibold">
-                                    Item Rating:
-                                </span>
+                                <span className="font-semibold">Rating:</span>
                                 <input
+                                    required
                                     className="w-full px-4 py-2 rounded-lg text-darkBg focus:outline-primary"
                                     type="text"
                                     name="rating"
@@ -160,9 +183,10 @@ const AddEquipment = () => {
                                 htmlFor="customization"
                             >
                                 <span className="font-semibold">
-                                    Item Customization:
+                                    Customization:
                                 </span>
                                 <input
+                                    required
                                     className="w-full px-4 py-2 rounded-lg text-darkBg focus:outline-primary"
                                     type="text"
                                     name="customization"
@@ -180,6 +204,7 @@ const AddEquipment = () => {
                                     Delivery Time:
                                 </span>
                                 <input
+                                    required
                                     className="w-full px-4 py-2 rounded-lg text-darkBg focus:outline-primary"
                                     type="text"
                                     name="deliveryTime"
@@ -193,10 +218,9 @@ const AddEquipment = () => {
                                 className="flex flex-col gap-2"
                                 htmlFor="image"
                             >
-                                <span className="font-semibold">
-                                    Item Image:
-                                </span>
+                                <span className="font-semibold">Image:</span>
                                 <input
+                                    required
                                     className="w-full px-4 py-2 rounded-lg text-darkBg focus:outline-primary"
                                     type="text"
                                     name="image"
@@ -211,9 +235,10 @@ const AddEquipment = () => {
                                 htmlFor="stockAvailability"
                             >
                                 <span className="font-semibold">
-                                    Stock Availabitly:
+                                    Stock Quantity:
                                 </span>
                                 <input
+                                    required
                                     min={0}
                                     className="w-full px-4 py-2 rounded-lg text-darkBg [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none focus:outline-primary"
                                     type="number"

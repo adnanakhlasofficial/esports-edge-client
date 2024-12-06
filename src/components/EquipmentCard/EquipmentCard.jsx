@@ -5,7 +5,7 @@ const EquipmentCard = ({ equipment }) => {
     console.log(equipment);
 
     return (
-        <div className="bg-slate-200 dark:bg-[#161838] py-6 px-8 rounded-md w-10/12 flex flex-col">
+        <div className="bg-slate-200 dark:bg-[#161838] py-6 px-8 rounded-md max-w-xs flex flex-col">
             <div className="mb-6 h-48 flex justify-center">
                 <img
                     className="h-full"

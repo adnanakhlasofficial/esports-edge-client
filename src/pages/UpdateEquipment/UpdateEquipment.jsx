@@ -87,7 +87,7 @@ const UpdateEquipment = () => {
                                 htmlFor="name"
                             >
                                 <span className="font-semibold">
-                                    Item Name:
+                                    Name:
                                 </span>
                                 <input
                                     className="w-full px-4 py-2 rounded-lg text-darkBg focus:outline-primary"
@@ -105,7 +105,7 @@ const UpdateEquipment = () => {
                                 htmlFor="category"
                             >
                                 <span className="font-semibold">
-                                    Category Name:
+                                    Category:
                                 </span>
                                 <input
                                     className="w-full px-4 py-2 rounded-lg text-darkBg focus:outline-primary"
@@ -123,7 +123,7 @@ const UpdateEquipment = () => {
                                 htmlFor="price"
                             >
                                 <span className="font-semibold">
-                                    Item Price:
+                                    Price:
                                 </span>
                                 <input
                                     className="w-full px-4 py-2 rounded-lg text-darkBg focus:outline-primary"
@@ -141,7 +141,7 @@ const UpdateEquipment = () => {
                                 htmlFor="rating"
                             >
                                 <span className="font-semibold">
-                                    Item Rating:
+                                    Rating:
                                 </span>
                                 <input
                                     className="w-full px-4 py-2 rounded-lg text-darkBg focus:outline-primary"
@@ -159,7 +159,7 @@ const UpdateEquipment = () => {
                                 htmlFor="customization"
                             >
                                 <span className="font-semibold">
-                                    Item Customization:
+                                    Customization:
                                 </span>
                                 <input
                                     className="w-full px-4 py-2 rounded-lg text-darkBg focus:outline-primary"
@@ -195,7 +195,7 @@ const UpdateEquipment = () => {
                                 htmlFor="image"
                             >
                                 <span className="font-semibold">
-                                    Item Image:
+                                    Image:
                                 </span>
                                 <input
                                     className="w-full px-4 py-2 rounded-lg text-darkBg focus:outline-primary"
@@ -213,7 +213,7 @@ const UpdateEquipment = () => {
                                 htmlFor="stockAvailability"
                             >
                                 <span className="font-semibold">
-                                    Stock Availabitly:
+                                    Stock Quantity:
                                 </span>
                                 <input
                                     min={0}

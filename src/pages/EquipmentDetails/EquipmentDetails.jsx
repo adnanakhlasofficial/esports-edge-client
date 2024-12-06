@@ -5,6 +5,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../provider/AuthProvider/AuthProvider";
 import productBg from "../../assets/img/product.jpg";
 import { Helmet, HelmetProvider } from "react-helmet-async";
+import Swal from "sweetalert2";
 
 const EquipmentDetails = () => {
     const { user } = useContext(AuthContext);
@@ -13,6 +14,35 @@ const EquipmentDetails = () => {
     const { id } = useParams();
     console.log(id);
     const navigate = useNavigate();
+
+    const handleRemoveEquipment = (id) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "'Do you really want to remove this product?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, remove it!",
+            cancelButtonText: 'No, keep it'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`http://localhost:5000/equipment/${id}`, {
+                    method: "DELETE",
+                })
+                    .then((res) => res.json())
+                    .then((data) => {
+                        console.log(data);
+                    })
+                    .catch((error) => console.log(error));
+                Swal.fire({
+                    title: "Removed!",
+                    text: "Your file has been deleted.",
+                    icon: "success",
+                });
+            }
+        });
+    };
 
     return (
         <HelmetProvider>
@@ -29,68 +59,87 @@ const EquipmentDetails = () => {
             </div>
 
             <div className="wrapper">
-                <button className="btn mt-16 w-56" onClick={() => navigate(-1)}>Go Back</button>
+                <button className="btn mt-16 w-56" onClick={() => navigate(-1)}>
+                    Go Back
+                </button>
             </div>
 
-            <div className="wrapper !max-w-3xl w-full bg-slate-200 dark:bg-[#161838]  my-12 flex flex-col lg:flex-row justify-between gap-16 items-center rounded-3xl bg-off-white !px-20 !py-16">
-                <div className="h-72 w-full">
-                    <img className="h-full" src={data.image} alt="" />
-                </div>
-
-                <div className="space-y-4 w-full">
-                    <div className="dark:!text-darkText text-darkBg">
-                        <p>{data.username}</p>
-                        <p>{data.useremail}</p>
-                    </div>
-                    <h2 className="text-3xl font-bold text-deep-black">
+            <div className="max-w-2xl mx-auto my-4 p-4 bg-slate-200 dark:bg-darkPurple rounded-lg shadow-md transition duration-300">
+                {" "}
+                <div className="flex justify-center">
+                    <img
+                        className="h-80 rounded-lg"
+                        src={data.image}
+                        alt={data.name}
+                    />
+                </div>{" "}
+                <div className="p-4">
+                    {" "}
+                    <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100">
                         {data.name}
-                    </h2>
-                    <p className="text-xl font-semibold text-deep-gray">
+                    </h2>{" "}
+                    <p className="text-gray-600 dark:text-gray-400">
+                        {data.category}
+                    </p>{" "}
+                    <p className="text-gray-800 dark:text-gray-100 mt-2 text-3xl font-bold">
                         Price: ${data.price}
-                    </p>
+                    </p>{" "}
+                    <p className="text-yellow-500 mt-2 flex items-center gap-2 font-bold">
+                        Rating:{" "}
+                        <ReactStars
+                            count={5}
+                            value={data.rating}
+                            size={24}
+                            activeColor="#EAB308"
+                        />{" "}
+                        <span>{data.rating}</span>
+                    </p>{" "}
+                    <p className="text-gray-600 dark:text-gray-400 mt-2">
+                        Customization: {data.customization}
+                    </p>{" "}
+                    <p className="text-gray-600 dark:text-gray-400 mt-2">
+                        Delivery Time: {data.deliveryTime}
+                    </p>{" "}
                     <p
-                        className={
+                        className={`mt-2 font-bold ${
                             data.stockAvailability
-                                ? "inline-block rounded-full border-2 border-[#309C08]  px-4 py-2 text-sm font-medium text-[#309C08]"
-                                : "inline-block rounded-full border-2 border-gray px-4 py-2"
-                        }
+                                ? "text-green-500 px-4 py-2 border-2 border-green-500 w-max rounded-full"
+                                : "text-red-500 px-4 py-2 border-2 border-red-500 w-max rounded-full"
+                        }`}
                     >
-                        {data.stockAvailability ? "In Stock" : "Out of Stock"}
-                    </p>
-                    <p className="text-lg text-gray">{"dfadf"}</p>
-                    <div>
-                        <h2 className="text-lg font-bold text-deep-black">
-                            Rating
-                        </h2>
-                        <div className="flex items-center gap-4">
-                            {data.rating && (
-                                <ReactStars
-                                    count={5}
-                                    size={24}
-                                    value={data.rating}
-                                    activeColor="#F9C004"
-                                    edit={false}
-                                />
-                            )}
-                            <span className="rounded-full border-2 border-gray px-4 py-2 text-sm font-medium text-deep-black">
-                                {data.rating}
-                            </span>
-                        </div>
-                    </div>
-
-                    {user.email === data.useremail && (
-                        <div className="w-full space-y-4">
-                            <Link to={`/updateEquipment/${id}`}>
-                                <button className="btn w-full">
+                        {" "}
+                        {data.stockAvailability
+                            ? "In Stock"
+                            : "Out of Stock"}{" "}
+                    </p>{" "}
+                    <div className="mt-4">
+                        {" "}
+                        <p className="text-gray-600 dark:text-gray-400">
+                            User Email: {data.useremail}
+                        </p>{" "}
+                        <p className="text-gray-600 dark:text-gray-400">
+                            User Name: {data.username}
+                        </p>{" "}
+                    </div>{" "}
+                    {user?.email === data?.useremail && (
+                        <div className="mt-8 flex gap-4">
+                            <Link
+                                className="w-full block"
+                                to={`/updateEquipment/${data._id}`}
+                            >
+                                <button className="btn block w-full">
                                     Update Details
                                 </button>
                             </Link>
-                            <button className="btn w-full !border-red-500  before:bg-red-500">
+                            <button
+                                onClick={() => handleRemoveEquipment(id)}
+                                className="w-full btn border-red-500 before:bg-red-500 block"
+                            >
                                 Remove Equipment
                             </button>
                         </div>
                     )}
-                </div>
+                </div>{" "}
             </div>
         </HelmetProvider>
     );
