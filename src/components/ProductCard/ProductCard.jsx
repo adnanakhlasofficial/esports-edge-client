@@ -27,6 +27,7 @@ const ProductCard = ({ equipment }) => {
                         count={5}
                         value={parseFloat(equipment.rating)}
                         size={24}
+                        isHalf={true}
                         activeColor="#ffd700"
                         edit={false}
                     />
