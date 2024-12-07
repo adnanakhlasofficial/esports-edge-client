@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { FiSun } from "react-icons/fi";
 import { FaMoon } from "react-icons/fa";
 import { AuthContext } from "../../provider/AuthProvider/AuthProvider";
@@ -7,6 +7,7 @@ import logoDark from "/images/logo-dark.png";
 import logoLight from "/images/logo-light.png";
 import { MdClose } from "react-icons/md";
 import { HiBars3 } from "react-icons/hi2";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
     const { user, logoutUser } = useContext(AuthContext);
@@ -37,21 +38,37 @@ const Navbar = () => {
 
     const handleSignOut = () => {
         logoutUser()
-            .then(() => console.log("logout"))
-            .catch((error) => console.log(error));
+            .then(() => {
+                Swal.fire({
+                    title: "Logged Out",
+                    text: "You have been successfully logged out.",
+                    icon: "success",
+                    confirmButtonColor: "#3085d6",
+                    confirmButtonText: "OK",
+                });
+            })
+            .catch((error) => {
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: error.code,
+                });
+            });
     };
 
     return (
         <nav>
             <section className="wrapper relative flex justify-between items-center py-6 ">
                 <div>
-                    <h2 className="text-4xl font-bold">
-                        <img
-                            className="w-24"
-                            src={mode ? logoLight : logoDark}
-                            alt=""
-                        />
-                    </h2>
+                    <Link to={"/"}>
+                        <h2 className="text-4xl font-bold">
+                            <img
+                                className="w-24"
+                                src={mode ? logoLight : logoDark}
+                                alt=""
+                            />
+                        </h2>
+                    </Link>
                 </div>
 
                 <div className="flex gap-6 items-center">
@@ -85,7 +102,9 @@ const Navbar = () => {
                     <div className="order-2 fixed bottom-6 right-6 z-50">
                         <button
                             data-tooltip-id="my-tooltip"
-                            data-tooltip-content={mode === "light" ? "Dark Mode" : "Light Mode"}
+                            data-tooltip-content={
+                                mode === "light" ? "Dark Mode" : "Light Mode"
+                            }
                             data-tooltip-place="left"
                             className="w-12 h-12 flex justify-center items-center bg-primary rounded-full"
                             onClick={changeTheme}
