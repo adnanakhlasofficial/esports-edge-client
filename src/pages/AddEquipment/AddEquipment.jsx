@@ -22,7 +22,7 @@ const AddEquipment = () => {
         const stockAvailability = parseInt(form.stockAvailability.value)
             ? true
             : false;
-        
+
         const description = form.description.value;
 
         const itemInfo = {
@@ -36,10 +36,8 @@ const AddEquipment = () => {
             deliveryTime,
             image,
             stockAvailability,
-            description
+            description,
         };
-
-        console.log(itemInfo);
 
         Swal.fire({
             title: "Are you sure?",
@@ -51,7 +49,7 @@ const AddEquipment = () => {
             confirmButtonText: "Yes, add it!",
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch("http://localhost:5000/equipments/", {
+                fetch("https://esports-edge-da.vercel.app/equipments/", {
                     method: "POST",
                     headers: {
                         "content-type": "application/json",
@@ -60,16 +58,14 @@ const AddEquipment = () => {
                 })
                     .then((res) => res.json())
                     .then((data) => {
-                        console.log(data);
-                        Swal.fire({
-                            title: "Added!",
-                            text: "Your product has been added.",
-                            icon: "success",
-                        });
-                        form.reset();
-                    })
-                    .catch((error) => {
-                        console.log(error);
+                        if (data.insertedId) {
+                            Swal.fire({
+                                title: "Added!",
+                                text: "Your product has been added.",
+                                icon: "success",
+                            });
+                            form.reset();
+                        }
                     });
             }
         });

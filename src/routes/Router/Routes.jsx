@@ -19,12 +19,12 @@ const router = createBrowserRouter([
             {
                 path: "/",
                 element: <Home></Home>,
-                loader: () => fetch("http://localhost:5000/equipments"),
+                loader: () => fetch("https://esports-edge-da.vercel.app/equipments"),
             },
             {
                 path: "/sports-equipment",
                 element: <SportsEquipment></SportsEquipment>,
-                loader: () => fetch("http://localhost:5000/equipments"),
+                loader: () => fetch("https://esports-edge-da.vercel.app/equipments"),
             },
             {
                 path: "/add-equipment",
@@ -50,7 +50,7 @@ const router = createBrowserRouter([
                     </SecureRoute>
                 ),
                 loader: ({ params }) =>
-                    fetch(`http://localhost:5000/equipment/${params.id}`),
+                    fetch(`https://esports-edge-da.vercel.app/equipment/${params.id}`),
             },
             {
                 path: "/updateEquipment/:id",
@@ -60,7 +60,7 @@ const router = createBrowserRouter([
                     </SecureRoute>
                 ),
                 loader: ({ params }) =>
-                    fetch(`http://localhost:5000/equipment/${params.id}`),
+                    fetch(`https://esports-edge-da.vercel.app/equipment/${params.id}`),
             },
             {
                 path: "/signin",

@@ -1,24 +1,25 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../../provider/AuthProvider/AuthProvider";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import Swal from "sweetalert2";
 
 const SignUp = () => {
-    const { createUser, updateUser, setLoading, googleLogin } =
+    const { createUser, updateUser, setLoading, googleLogin, user } =
         useContext(AuthContext);
     const [viewPassword, setViewPassword] = useState(false);
     const navigate = useNavigate();
 
+    if(user) return <Navigate to={"/"}></Navigate>
+
     const handleGoogleSignUp = () => {
         googleLogin()
-            .then((user) => {
-                console.log(user);
+            .then((userCredential) => {
                 setLoading(false);
                 Swal.fire({
                     title: "Account Created!",
-                    text: "Your account has been successfully created. Welcome aboard!",
+                    text: `Your account has been successfully created. Welcome aboard! ${userCredential?.user?.displayName}`,
                     icon: "success",
                     confirmButtonColor: "#3085d6",
                     confirmButtonText: "Start Exploring",
@@ -29,7 +30,11 @@ const SignUp = () => {
                 });
             })
             .catch((error) => {
-                console.log(error);
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: error.code,
+                });
             });
     };
 
@@ -53,17 +58,13 @@ const SignUp = () => {
                 confirmButtonText: "Try Again",
             });
 
-        const newUser = { displayName, email, photoURL, password };
-        console.log(newUser);
         createUser(email, password)
-            .then((userCredential) => {
-                const user = userCredential.user;
+            .then(() => {
                 updateUser({ displayName, photoURL });
-                console.log(user);
                 setLoading(false);
-                Swal.fire({
+                    Swal.fire({
                     title: "Account Created!",
-                    text: "Your account has been successfully created. Welcome aboard!",
+                    text: `Your account has been successfully created. Welcome aboard! ${displayName}`,
                     icon: "success",
                     confirmButtonColor: "#3085d6",
                     confirmButtonText: "Start Exploring",

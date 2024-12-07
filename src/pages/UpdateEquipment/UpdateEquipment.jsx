@@ -9,7 +9,6 @@ const UpdateEquipment = () => {
     const { id } = useParams();
     const data = useLoaderData();
     const navigate = useNavigate();
-    console.log(id, data);
 
     const handleUpdateEquipment = (e) => {
         e.preventDefault();
@@ -55,28 +54,32 @@ const UpdateEquipment = () => {
             cancelButtonText: "No, cancel",
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/updateEquipment/${id}`, {
-                    method: "PUT",
-                    headers: {
-                        "content-type": "application/json",
-                    },
-                    body: JSON.stringify(itemInfo),
-                })
+                fetch(
+                    `https://esports-edge-da.vercel.app/updateEquipment/${id}`,
+                    {
+                        method: "PUT",
+                        headers: {
+                            "content-type": "application/json",
+                        },
+                        body: JSON.stringify(itemInfo),
+                    }
+                )
                     .then((res) => res.json())
                     .then((data) => {
-                        console.log(data);
-                        Swal.fire({
-                            title: "Updated!",
-                            text: "The equipment details have been successfully updated.",
-                            icon: "success",
-                            confirmButtonColor: "#3085d6",
-                            confirmButtonText: "OK",
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                form.reset();
-                                navigate(-1);
-                            }
-                        });
+                        if (data.modifiedCount) {
+                            Swal.fire({
+                                title: "Updated!",
+                                text: "The equipment details have been successfully updated.",
+                                icon: "success",
+                                confirmButtonColor: "#3085d6",
+                                confirmButtonText: "OK",
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    form.reset();
+                                    navigate(-1);
+                                }
+                            });
+                        }
                     })
                     .catch((error) => {
                         Swal.fire({

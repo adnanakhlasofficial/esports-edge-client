@@ -10,9 +10,7 @@ import Swal from "sweetalert2";
 const EquipmentDetails = () => {
     const { user } = useContext(AuthContext);
     const data = useLoaderData();
-    console.log(data);
     const { id } = useParams();
-    console.log(id);
     const navigate = useNavigate();
 
     const handleRemoveEquipment = (id) => {
@@ -27,25 +25,25 @@ const EquipmentDetails = () => {
             cancelButtonText: "No, keep it",
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/equipment/${id}`, {
+                fetch(`https://esports-edge-da.vercel.app/equipment/${id}`, {
                     method: "DELETE",
                 })
                     .then((res) => res.json())
                     .then((data) => {
-                        console.log(data);
-                        Swal.fire({
-                            title: "Removed!",
-                            text: "Your file has been deleted.",
-                            icon: "success",
-                            confirmButtonColor: "#3085d6",
-                            confirmButtonText: "OK",
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                navigate("/");
-                            }
-                        });
-                    })
-                    .catch((error) => console.log(error));
+                        if (data.deletedCount) {
+                            Swal.fire({
+                                title: "Removed!",
+                                text: "Your file has been deleted.",
+                                icon: "success",
+                                confirmButtonColor: "#3085d6",
+                                confirmButtonText: "OK",
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    navigate("/");
+                                }
+                            });
+                        }
+                    });
             }
         });
     };
@@ -102,10 +100,16 @@ const EquipmentDetails = () => {
                         <span>{data.rating}</span>
                     </p>{" "}
                     <p className="text-gray-600 dark:text-gray-400 mt-2">
-                        <span className="dark:text-white text-darkBg font-medium">Customization:</span> {data.customization}
+                        <span className="dark:text-white text-darkBg font-medium">
+                            Customization:
+                        </span>{" "}
+                        {data.customization}
                     </p>{" "}
                     <p className="text-gray-600 dark:text-gray-400 mt-2">
-                        <span className="dark:text-white text-darkBg font-medium">Delivery Time:</span> {data.deliveryTime}
+                        <span className="dark:text-white text-darkBg font-medium">
+                            Delivery Time:
+                        </span>{" "}
+                        {data.deliveryTime}
                     </p>{" "}
                     <p
                         className={`mt-2 font-bold ${
@@ -120,15 +124,24 @@ const EquipmentDetails = () => {
                             : "Out of Stock"}{" "}
                     </p>{" "}
                     <pre className="text-gray-600 dark:text-gray-400 mt-2 text-wrap font-openSans flex flex-col gap-2 w-5/6">
-                        <span className="dark:text-white text-darkBg font-medium">Description:</span> {data.description}
+                        <span className="dark:text-white text-darkBg font-medium">
+                            Description:
+                        </span>{" "}
+                        {data.description}
                     </pre>{" "}
                     <div className="mt-4">
                         {" "}
                         <p className="text-gray-600 dark:text-gray-400">
-                            <span className="dark:text-white text-darkBg font-medium">User Email:</span> {data.useremail}
+                            <span className="dark:text-white text-darkBg font-medium">
+                                User Email:
+                            </span>{" "}
+                            {data.useremail}
                         </p>{" "}
                         <p className="text-gray-600 dark:text-gray-400">
-                            <span className="dark:text-white text-darkBg font-medium">User Name:</span> {data.username}
+                            <span className="dark:text-white text-darkBg font-medium">
+                                User Name:
+                            </span>{" "}
+                            {data.username}
                         </p>{" "}
                     </div>{" "}
                     {user?.email === data?.useremail && (

@@ -11,7 +11,6 @@ import Category from "../../components/Category/Category";
 
 const Home = () => {
     const equipments = useLoaderData();
-    console.log(equipments);
 
     return (
         <HelmetProvider>

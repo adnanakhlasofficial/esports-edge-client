@@ -1,23 +1,23 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../../provider/AuthProvider/AuthProvider";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import Swal from "sweetalert2";
 
 const SignIn = () => {
-    const { loginUser, googleLogin } = useContext(AuthContext);
+    const { loginUser, googleLogin, user } = useContext(AuthContext);
     const navigate = useNavigate();
     const { state } = useLocation();
-    console.log(state);
     const [viewPassword, setViewPassword] = useState(false);
+
+    if(user) return <Navigate to={state ? state : "/"}></Navigate>
 
     const handleGoogleSignIn = () => {
         googleLogin()
-            .then((user) => {
-                console.log(user);
+            .then((userCredential) => {
                 Swal.fire({
-                    title: "Welcome Back!",
+                    title: `Welcome Back! ${userCredential?.user?.displayName}`,
                     text: "You have successfully logged in.",
                     icon: "success",
                     confirmButtonColor: "#3085d6",
@@ -29,7 +29,11 @@ const SignIn = () => {
                 });
             })
             .catch((error) => {
-                console.log(error);
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: error.code,
+                });
             });
     };
 
@@ -38,14 +42,11 @@ const SignIn = () => {
         const form = e.target;
         const email = form.email.value;
         const password = form.password.value;
-        const userInfo = { email, password };
-        console.log(userInfo);
 
         loginUser(email, password)
-            .then((user) => {
-                console.log(user);
+            .then((userCredential) => {
                 Swal.fire({
-                    title: "Welcome Back!",
+                    title: `Welcome Back! ${userCredential?.user?.displayName}`,
                     text: "You have successfully logged in.",
                     icon: "success",
                     confirmButtonColor: "#3085d6",

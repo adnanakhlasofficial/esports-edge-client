@@ -27,27 +27,27 @@ const EquipmentsList = () => {
                 );
                 setEquipments(remaining);
 
-                fetch(`http://localhost:5000/equipment/${id}`, {
+                fetch(`https://esports-edge-da.vercel.app/equipment/${id}`, {
                     method: "DELETE",
                 })
                     .then((res) => res.json())
                     .then((data) => {
-                        console.log(data);
-                        Swal.fire({
-                            title: "Removed!",
-                            text: "Your file has been deleted.",
-                            icon: "success",
-                            confirmButtonColor: "#3085d6",
-                            confirmButtonText: "OK",
-                        });
-                    })
-                    .catch((error) => console.log(error));
+                        if (data.deletedCount) {
+                            Swal.fire({
+                                title: "Removed!",
+                                text: "Your file has been deleted.",
+                                icon: "success",
+                                confirmButtonColor: "#3085d6",
+                                confirmButtonText: "OK",
+                            });
+                        }
+                    });
             }
         });
     };
 
     useEffect(() => {
-        fetch("http://localhost:5000/equipments")
+        fetch("https://esports-edge-da.vercel.app/equipments")
             .then((res) => res.json())
             .then((data) => {
                 const filterData = data.filter(

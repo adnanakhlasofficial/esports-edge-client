@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import ReactStars from "react-rating-stars-component";
 
 const EquipmentCard = ({ equipment }) => {
-    console.log(equipment);
-
     return (
         <div className="w-full p-4 bg-slate-200 dark:bg-[#161838] rounded-lg shadow-lg">
             {" "}

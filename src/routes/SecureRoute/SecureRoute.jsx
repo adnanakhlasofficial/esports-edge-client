@@ -1,26 +1,21 @@
-import PropTypes from 'prop-types';
-import { useContext } from 'react';
-import { AuthContext } from '../../provider/AuthProvider/AuthProvider';
-import { Navigate, useLocation } from 'react-router-dom';
+import PropTypes from "prop-types";
+import { useContext } from "react";
+import { AuthContext } from "../../provider/AuthProvider/AuthProvider";
+import { Navigate, useLocation } from "react-router-dom";
 
-const SecureRoute = ({children}) => {
-    const {user} = useContext(AuthContext);
-    const {pathname} = useLocation()
-    console.log(pathname);
+const SecureRoute = ({ children }) => {
+    const { user } = useContext(AuthContext);
+    const { pathname } = useLocation();
 
     if (!user) {
-        return <Navigate to={"/signin"} state={pathname}></Navigate>
+        return <Navigate to={"/signin"} state={pathname}></Navigate>;
     }
-    
-    return (
-        <>
-            {children}
-        </>
-    );
+
+    return <>{children}</>;
 };
 
 SecureRoute.propTypes = {
-    children: PropTypes.object
-}
+    children: PropTypes.object,
+};
 
 export default SecureRoute;
