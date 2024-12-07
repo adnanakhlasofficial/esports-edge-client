@@ -10,7 +10,7 @@ const SportsEquipment = () => {
     return (
         <HelmetProvider>
             <Helmet>
-                <title>Sport Equipment | Sport Edge</title>
+                <title>Sport Equipment | Sports Edge</title>
                 <link rel="canonical" href="https://www.tacobell.com/" />
             </Helmet>
             <div>

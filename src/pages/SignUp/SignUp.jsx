@@ -85,7 +85,7 @@ const SignUp = () => {
     return (
         <HelmetProvider>
             <Helmet>
-                <title>Sign Up | Sport Edge</title>
+                <title>Sign Up | Sports Edge</title>
                 <link rel="canonical" href="https://www.tacobell.com/" />
             </Helmet>
             <section className="w-full min-h-screen grid place-items-center">

@@ -79,7 +79,7 @@ const AddEquipment = () => {
         <HelmetProvider>
             <div className="wrapper bg-slate-200 dark:bg-darkPurple p-8 my-12 rounded-xl !max-w-4xl w-full">
                 <Helmet>
-                    <title>Add Equipment | Sport Edge</title>
+                    <title>Add Equipment | Sports Edge</title>
                     <link rel="canonical" href="https://www.tacobell.com/" />
                 </Helmet>
                 <h2 className="text-center text-4xl font-bold">
@@ -261,7 +261,7 @@ const AddEquipment = () => {
                                 </span>
                                 <textarea
                                     rows={6}
-                                    className="w-full px-4 py-2 rounded-lg text-darkBg focus:outline-primary"
+                                    className="w-full px-4 py-2 rounded-lg text-darkBg focus:outline-primary resize-none"
                                     name="description"
                                     id="description"
                                     placeholder="Enter equipment description"

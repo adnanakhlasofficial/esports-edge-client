@@ -68,7 +68,7 @@ const SignIn = () => {
     return (
         <HelmetProvider>
             <Helmet>
-                <title>Sign In | Sport Edge</title>
+                <title>Sign In | Sports Edge</title>
                 <link rel="canonical" href="https://www.tacobell.com/" />
             </Helmet>
             <section className="w-full min-h-screen grid place-items-center">

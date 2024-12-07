@@ -53,7 +53,7 @@ const EquipmentDetails = () => {
     return (
         <HelmetProvider>
             <Helmet>
-                <title>Equipment Details | Sport Edge</title>
+                <title>Equipment Details | Sports Edge</title>
                 <link rel="canonical" href="https://www.tacobell.com/" />
             </Helmet>
             <div>
