@@ -15,7 +15,6 @@ const router = createBrowserRouter([
     {
         path: "/",
         element: <Root></Root>,
-        errorElement: <Error></Error>,
         children: [
             {
                 path: "/",
@@ -73,6 +72,10 @@ const router = createBrowserRouter([
             },
         ],
     },
+    {
+        path: "*",
+        element: <Error></Error>
+    }
 ]);
 
 export default router;
