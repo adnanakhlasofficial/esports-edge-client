@@ -11,7 +11,7 @@ import Swal from "sweetalert2";
 
 const Navbar = () => {
     const { user, logoutUser } = useContext(AuthContext);
-    const [navStatus, setNavStatus] = useState(true);
+    const [navStatus, setNavStatus] = useState(false);
     const [mode, setMode] = useState("light");
 
     function changeTheme() {
