@@ -3,7 +3,7 @@ import { FaTruck, FaGem, FaLifeRing } from 'react-icons/fa';
 const Services = () => {
   return (
     <div className="bg-slate-200 dark:bg-[#161838] dark:text-slate-200 text-darkBg py-12">
-      <div className="container mx-auto flex justify-around">
+      <div className="container mx-auto flex justify-around flex-col lg:flex-row gap-8">
         <div className="text-center">
           <FaTruck className="text-6xl text-darkPurple dark:text-slate-300 mx-auto mb-4" />
           <h3 className="text-xl font-bold">FREE SHIPPING</h3>

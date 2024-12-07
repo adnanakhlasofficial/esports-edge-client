@@ -3,7 +3,7 @@ import contact from "../../assets/contact.json";
 
 const ContactUs = () => {
     return (
-        <section className="wrapper flex items-center justify-between">
+        <section className="wrapper flex flex-col lg:flex-row items-center justify-between">
             <div className="bg-slate-200 dark:bg-[#161838] px-8 py-12 w-full rounded-lg order-2">
                 <div>
                     <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-8">

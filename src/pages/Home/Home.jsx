@@ -6,6 +6,8 @@ import Services from "../../components/Services/Services";
 import BrandSection from "../../components/BrandSection/BrandSection";
 import ContactUs from "../../components/ContactUs/ContactUs";
 import StoreLocation from "../../components/StoreLocation/StoreLocation";
+import AboutUs from "../../components/AboutUs/AboutUs";
+import Category from "../../components/Category/Category";
 
 const Home = () => {
     const equipments = useLoaderData();
@@ -21,6 +23,10 @@ const Home = () => {
                 <BannerSlider></BannerSlider>
 
                 <section className="my-12">
+                    <AboutUs></AboutUs>
+                </section>
+
+                <section className="my-12">
                     <Services></Services>
                 </section>
 
@@ -34,6 +40,10 @@ const Home = () => {
                             ></EquipmentCard>
                         ))}
                     </div>
+                </section>
+
+                <section className="my-12">
+                    <Category></Category>
                 </section>
 
                 <section>
