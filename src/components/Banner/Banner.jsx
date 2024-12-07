@@ -13,6 +13,7 @@ const Banner = ({ title, desc, img }) => {
         >
             <div className="absolute w-full h-full z-10">
                 <img
+                    loading="lazy"
                     className="w-full h-full object-cover object-center"
                     src={img}
                     alt=""

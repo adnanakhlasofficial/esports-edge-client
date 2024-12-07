@@ -15,7 +15,7 @@ const Footer = () => {
         <>
             <section className="wrapper py-20 gap-16 flex justify-between flex-col lg:flex-row">
                 <div>
-                    <img className="w-24" src={logo} alt="" />
+                    <img loading="lazy" className="w-24" src={logo} alt="" />
                     <div className="space-y-2">
                         <h2 className="text-4xl font-bold">Sports Edge</h2>
                         <p className="text-lg max-w-[40rem]">

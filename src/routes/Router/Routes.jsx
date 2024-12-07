@@ -35,7 +35,7 @@ const router = createBrowserRouter([
                 ),
             },
             {
-                path: "equipments-list",
+                path: "/equipments-list",
                 element: (
                     <SecureRoute>
                         <EquipmentsList></EquipmentsList>

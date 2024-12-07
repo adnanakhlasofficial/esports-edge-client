@@ -9,9 +9,9 @@ const Category = () => {
                 <h2 className="text-center my-8 text-3xl font-bold">Specialized Category</h2>
             </div>
             <div className="wrapper grid grid-cols-1 lg:grid-cols-2 gap-4 grid-rows-2">
-                <img className="row-span-2 lg:col-span-1 w-full h-full" src={gym} alt="" />
-                <img className="w-full h-full" src={walk} alt="" />
-                <img className="w-full h-full" src={golf} alt="" />
+                <img loading="lazy" className="row-span-2 lg:col-span-1 w-full h-full" src={gym} alt="" />
+                <img loading="lazy" className="w-full h-full" src={walk} alt="" />
+                <img loading="lazy" className="w-full h-full" src={golf} alt="" />
             </div>
         </div>
     );

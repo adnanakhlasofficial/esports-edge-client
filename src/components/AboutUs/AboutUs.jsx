@@ -44,6 +44,7 @@ const AboutUs = () => {
 
                 <div className="w-1/2 flex justify-center">
                     <img
+                        loading="lazy"
                         src={aboutImg} // Replace this URL with your image URL
                         alt=""
                         className="h-full rounded-md shadow-md"

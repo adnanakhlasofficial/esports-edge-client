@@ -8,6 +8,7 @@ const EquipmentCard = ({ equipment }) => {
             {" "}
             <div className="h-56 flex justify-center">
                 <img
+                    loading="lazy"
                     className="h-full object-cover rounded-lg"
                     src={equipment.image}
                     alt={equipment.name}

@@ -72,6 +72,7 @@ const EquipmentDetails = () => {
                 {" "}
                 <div className="flex justify-center">
                     <img
+                        loading="lazy"
                         className="h-80 rounded-lg"
                         src={data.image}
                         alt={data.name}

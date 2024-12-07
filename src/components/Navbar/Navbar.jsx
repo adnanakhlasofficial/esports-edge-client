@@ -63,6 +63,7 @@ const Navbar = () => {
                     <Link to={"/"}>
                         <h2 className="text-4xl font-bold">
                             <img
+                                loading="lazy"
                                 className="w-24"
                                 src={mode ? logoLight : logoDark}
                                 alt=""
@@ -75,6 +76,7 @@ const Navbar = () => {
                     {user && (
                         <span className="cursor-pointer order-1 group">
                             <img
+                                loading="lazy"
                                 className="h-16 w-16 relative z-30 ring-2 ring-blue-500 object-cover rounded-full"
                                 src={user?.photoURL}
                                 alt=""

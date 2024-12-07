@@ -3,12 +3,11 @@ import ReactStars from "react-rating-stars-component";
 import { Link } from "react-router-dom";
 
 const ProductCard = ({ equipment, handleRemoveEquipment }) => {
-    
-
     return (
         <div className="p-4 bg-slate-200 dark:bg-[#161838] rounded-lg shadow-md transition duration-300 flex flex-col">
             <div className="h-56 flex justify-center">
                 <img
+                    loading="lazy"
                     className="h-full object-cover rounded-lg"
                     src={equipment.image}
                     alt={equipment.name}
@@ -72,7 +71,7 @@ const ProductCard = ({ equipment, handleRemoveEquipment }) => {
 
 ProductCard.propTypes = {
     equipment: PropTypes.object,
-    handleRemoveEquipment: PropTypes.func
+    handleRemoveEquipment: PropTypes.func,
 };
 
 export default ProductCard;
