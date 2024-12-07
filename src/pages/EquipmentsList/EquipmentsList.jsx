@@ -1,13 +1,13 @@
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import Banner from "../../components/Banner/Banner";
 import myEquipment from "../../assets/img/myEquipment.jpeg";
-import { Link } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../provider/AuthProvider/AuthProvider";
+import ProductCard from "../../components/ProductCard/ProductCard";
 
 const EquipmentsList = () => {
     const { user } = useContext(AuthContext);
-    const [equipments, setEquipments] = useState([])
+    const [equipments, setEquipments] = useState([]);
 
     useEffect(() => {
         fetch("http://localhost:5000/equipments")
@@ -36,52 +36,13 @@ const EquipmentsList = () => {
                 ></Banner>
 
                 <div className="wrapper my-12">
-                    <div className="wrapper my-20">
-                        <table className="w-full text-left">
-                            <thead>
-                                <tr className="*:px-2 *:py-2">
-                                    <th></th>
-                                    <th>Name</th>
-                                    <th>Price</th>
-                                    <th>Rating</th>
-                                    <th>Stock</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {equipments.map((equipment, idx) => (
-                                    <tr
-                                        key={equipment._id}
-                                        className="divide-y-2 divide-gray-200 dark:divide-gray-700  *:px-2 *:py-3 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors duration-300"
-                                    >
-                                        <th className="text-right">
-                                            {idx + 1}
-                                        </th>
-                                        <th>{equipment.name}</th>
-                                        <th>${equipment.price}</th>
-                                        <th>{equipment.rating}</th>
-                                        <th>
-                                            {equipment.stockAvailability ? (
-                                                <span className="text-green-600">
-                                                    In Stock
-                                                </span>
-                                            ) : (
-                                                <span className="text-red-600">
-                                                    Not in Stock
-                                                </span>
-                                            )}
-                                        </th>
-                                        <th className="text-center text-primary hover:underline underline-offset-2">
-                                            <Link
-                                                to={`/equipment/${equipment._id}`}
-                                            >
-                                                View Details
-                                            </Link>
-                                        </th>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {equipments.map((equipment) => (
+                            <ProductCard
+                                key={equipment._id}
+                                equipment={equipment}
+                            ></ProductCard>
+                        ))}
                     </div>
                 </div>
             </div>
