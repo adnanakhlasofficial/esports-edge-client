@@ -1,7 +1,10 @@
 import PropTypes from "prop-types";
 import ReactStars from "react-rating-stars-component";
+import { Link } from "react-router-dom";
 
-const ProductCard = ({ equipment }) => {
+const ProductCard = ({ equipment, handleRemoveEquipment }) => {
+    
+
     return (
         <div className="p-4 bg-slate-200 dark:bg-[#161838] rounded-lg shadow-md transition duration-300 flex flex-col">
             <div className="h-56 flex justify-center">
@@ -50,8 +53,16 @@ const ProductCard = ({ equipment }) => {
                 </p>
             </div>
             <div className="flex flex-col gap-2">
-                <button className="btn">Update Details</button>
-                <button className="btn border-red-500 before:bg-red-500">
+                <Link
+                    className="w-full"
+                    to={`/updateEquipment/${equipment._id}`}
+                >
+                    <button className="btn w-full">Update Details</button>
+                </Link>
+                <button
+                    onClick={() => handleRemoveEquipment(equipment._id)}
+                    className="btn border-red-500 before:bg-red-500"
+                >
                     Remove Equipment
                 </button>
             </div>
@@ -61,6 +72,7 @@ const ProductCard = ({ equipment }) => {
 
 ProductCard.propTypes = {
     equipment: PropTypes.object,
+    handleRemoveEquipment: PropTypes.func
 };
 
 export default ProductCard;

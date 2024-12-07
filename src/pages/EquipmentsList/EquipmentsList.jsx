@@ -4,10 +4,47 @@ import myEquipment from "../../assets/img/myEquipment.jpeg";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../provider/AuthProvider/AuthProvider";
 import ProductCard from "../../components/ProductCard/ProductCard";
+import Swal from "sweetalert2";
 
 const EquipmentsList = () => {
     const { user } = useContext(AuthContext);
     const [equipments, setEquipments] = useState([]);
+
+    const handleRemoveEquipment = (id) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "'Do you really want to remove this product?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, remove it!",
+            cancelButtonText: "No, keep it",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const remaining = equipments.filter(
+                    (equipment) => equipment._id !== id
+                );
+                setEquipments(remaining);
+
+                fetch(`http://localhost:5000/equipment/${id}`, {
+                    method: "DELETE",
+                })
+                    .then((res) => res.json())
+                    .then((data) => {
+                        console.log(data);
+                        Swal.fire({
+                            title: "Removed!",
+                            text: "Your file has been deleted.",
+                            icon: "success",
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
+                        });
+                    })
+                    .catch((error) => console.log(error));
+            }
+        });
+    };
 
     useEffect(() => {
         fetch("http://localhost:5000/equipments")
@@ -41,6 +78,7 @@ const EquipmentsList = () => {
                             <ProductCard
                                 key={equipment._id}
                                 equipment={equipment}
+                                handleRemoveEquipment={handleRemoveEquipment}
                             ></ProductCard>
                         ))}
                     </div>
