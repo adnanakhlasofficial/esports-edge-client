@@ -96,15 +96,16 @@ const EquipmentDetails = () => {
                             count={5}
                             value={data.rating}
                             size={24}
+                            edit={false}
                             activeColor="#EAB308"
                         />{" "}
                         <span>{data.rating}</span>
                     </p>{" "}
                     <p className="text-gray-600 dark:text-gray-400 mt-2">
-                        Customization: {data.customization}
+                        <span className="dark:text-white text-darkBg font-medium">Customization:</span> {data.customization}
                     </p>{" "}
                     <p className="text-gray-600 dark:text-gray-400 mt-2">
-                        Delivery Time: {data.deliveryTime}
+                        <span className="dark:text-white text-darkBg font-medium">Delivery Time:</span> {data.deliveryTime}
                     </p>{" "}
                     <p
                         className={`mt-2 font-bold ${
@@ -118,13 +119,16 @@ const EquipmentDetails = () => {
                             ? "In Stock"
                             : "Out of Stock"}{" "}
                     </p>{" "}
+                    <pre className="text-gray-600 dark:text-gray-400 mt-2 text-wrap font-openSans flex flex-col gap-2 w-5/6">
+                        <span className="dark:text-white text-darkBg font-medium">Description:</span> {data.description}
+                    </pre>{" "}
                     <div className="mt-4">
                         {" "}
                         <p className="text-gray-600 dark:text-gray-400">
-                            User Email: {data.useremail}
+                            <span className="dark:text-white text-darkBg font-medium">User Email:</span> {data.useremail}
                         </p>{" "}
                         <p className="text-gray-600 dark:text-gray-400">
-                            User Name: {data.username}
+                            <span className="dark:text-white text-darkBg font-medium">User Name:</span> {data.username}
                         </p>{" "}
                     </div>{" "}
                     {user?.email === data?.useremail && (

@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { AuthContext } from "../../provider/AuthProvider/AuthProvider";
-import { useLoaderData, useParams } from "react-router-dom";
+import { useLoaderData, useNavigate, useParams } from "react-router-dom";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import Swal from "sweetalert2";
 
@@ -8,6 +8,7 @@ const UpdateEquipment = () => {
     const { user } = useContext(AuthContext);
     const { id } = useParams();
     const data = useLoaderData();
+    const navigate = useNavigate();
     console.log(id, data);
 
     const handleUpdateEquipment = (e) => {
@@ -70,8 +71,12 @@ const UpdateEquipment = () => {
                             icon: "success",
                             confirmButtonColor: "#3085d6",
                             confirmButtonText: "OK",
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                form.reset();
+                                navigate(-1);
+                            }
                         });
-                        form.reset();
                     })
                     .catch((error) => {
                         Swal.fire({
