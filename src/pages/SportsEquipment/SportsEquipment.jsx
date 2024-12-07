@@ -2,10 +2,19 @@ import { Helmet, HelmetProvider } from "react-helmet-async";
 import Banner from "../../components/Banner/Banner";
 import myEquipment from "../../assets/img/myEquipment.jpeg";
 import { Link, useLoaderData } from "react-router-dom";
+import { useState } from "react";
 
 const SportsEquipment = () => {
-    const equipments = useLoaderData();
-    console.log(equipments);
+    const loadedEquipments = useLoaderData();
+    const [equipments, setEquipments] = useState(loadedEquipments || []);
+
+    const handleSortEquipment = () => {
+        const sorted = equipments.sort((prev, curr) => {
+            return prev.price - curr.price;
+        }, 0);
+
+        setEquipments(sorted);
+    };
 
     return (
         <HelmetProvider>
@@ -22,6 +31,14 @@ const SportsEquipment = () => {
                     img={myEquipment}
                 ></Banner>
                 <div className="wrapper my-20">
+                    <div className="text-right">
+                        <button
+                        data-tooltip-id="my-tooltip"
+                        data-tooltip-content="Ascending Order"
+                        data-tooltip-place="top" onClick={handleSortEquipment} className="btn">
+                            Sort by Price
+                        </button>
+                    </div>
                     <table className="w-full text-left">
                         <thead>
                             <tr className="*:px-2 *:py-2">
@@ -44,9 +61,15 @@ const SportsEquipment = () => {
                                     <th>${equipment.price}</th>
                                     <th>{equipment.rating}</th>
                                     <th>
-                                        {equipment.stockAvailability
-                                            ? <span className="text-green-600">In Stock</span>
-                                            : <span className="text-red-600">Not in Stock</span>}
+                                        {equipment.stockAvailability ? (
+                                            <span className="text-green-600">
+                                                In Stock
+                                            </span>
+                                        ) : (
+                                            <span className="text-red-600">
+                                                Not in Stock
+                                            </span>
+                                        )}
                                     </th>
                                     <th className="text-center text-primary hover:underline underline-offset-2">
                                         <Link
