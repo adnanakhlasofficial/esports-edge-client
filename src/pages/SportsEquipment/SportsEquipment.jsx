@@ -1,8 +1,9 @@
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import Banner from "../../components/Banner/Banner";
 import myEquipment from "../../assets/img/myEquipment.jpeg";
-import { Link, useLoaderData } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 import { useState } from "react";
+import EquipmentCard from "../../components/EquipmentCard/EquipmentCard";
 
 const SportsEquipment = () => {
   const loadedEquipments = useLoaderData();
@@ -42,41 +43,14 @@ const SportsEquipment = () => {
               Sort by Price
             </button>
           </div>
-          <table className="w-full text-left">
-            <thead>
-              <tr className="*:px-2 *:py-2">
-                <th></th>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Rating</th>
-                <th>Stock</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              {equipments.map((equipment, idx) => (
-                <tr
-                  key={equipment._id}
-                  className="divide-y-2 divide-gray-200 dark:divide-gray-700  *:px-2 *:py-3 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors duration-300"
-                >
-                  <th className="text-right">{idx + 1}</th>
-                  <th>{equipment.name}</th>
-                  <th>${equipment.price}</th>
-                  <th>{equipment.rating}</th>
-                  <th>
-                    {equipment.stockAvailability ? (
-                      <span className="text-green-600">In Stock</span>
-                    ) : (
-                      <span className="text-red-600">Not in Stock</span>
-                    )}
-                  </th>
-                  <th className="text-center text-primary hover:underline underline-offset-2">
-                    <Link to={`/equipment/${equipment._id}`}>View Details</Link>
-                  </th>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-12 h-fit">
+            {equipments.map((equipment) => (
+              <EquipmentCard
+                key={equipment._id}
+                equipment={equipment}
+              ></EquipmentCard>
+            ))}
+          </div>
         </div>
       </div>
     </HelmetProvider>
