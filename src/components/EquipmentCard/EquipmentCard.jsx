@@ -27,7 +27,7 @@ const EquipmentCard = ({ equipment }) => {
           </p>
         </div>
         <div className="mt-4">
-          <Link className="w-full" to={`/equipment/${equipment.id}`}>
+          <Link className="w-full" to={`/equipment/${equipment._id}`}>
             <button className="btn w-full">View Details</button>
           </Link>
         </div>
